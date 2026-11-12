@@ -20,6 +20,10 @@ import * as secretApp from './app-secrets';
 import * as simpleFinApp from './app-simplefin/app-simplefin';
 import * as syncApp from './app-sync';
 import { config } from './load-config';
+import {
+  handlers as plaidHandlers,
+  webhookHandlers as plaidWebhookHandlers,
+} from './plaid/router';
 
 const debugSensitive = createDebug('actual-sensitive:server');
 
@@ -43,6 +47,9 @@ if (process.env.NODE_ENV !== 'development') {
     }),
   );
 }
+
+// Plaid verifies the signature against the exact raw request bytes.
+app.use('/plaid/webhook', plaidWebhookHandlers);
 
 app.use(express.json({ limit: `${config.get('upload.fileSizeLimitMB')}mb` }));
 
@@ -68,6 +75,7 @@ app.use('/pluggyai', pluggai.handlers);
 app.use('/akahu', akahuApp.handlers);
 app.use('/enablebanking', enableBankingApp.handlers);
 app.use('/secret', secretApp.handlers);
+app.use('/plaid', plaidHandlers);
 
 if (config.get('corsProxy.enabled')) {
   app.use('/cors-proxy', corsApp.handlers);

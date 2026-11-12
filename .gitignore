@@ -116,3 +116,9 @@ storybook-static
 .actualrc.yaml
 .actualrc.yml
 actual.config.js
+
+# Big Money local credentials and financial storage
+.env.plaid
+.env.plaid.*
+!.env.plaid.example
+.local-data/
