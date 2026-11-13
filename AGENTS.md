@@ -10,6 +10,10 @@ completion criteria. For Plaid setup and its current limitations, read
 [PLAID.md](PLAID.md). Treat roadmap items as planned until their acceptance
 criteria have recorded evidence.
 
+Before changing architecture, storage ownership, shared contracts, or integration
+boundaries, read [ARCHITECTURE_LEDGER.md](ARCHITECTURE_LEDGER.md). Record changed
+decisions and implementation evidence there in the same task.
+
 ## Project Overview
 
 **Actual Budget** is a local-first personal finance tool written in TypeScript/JavaScript. It's 100% free and open-source with synchronization capabilities across devices.

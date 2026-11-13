@@ -7,6 +7,9 @@ This document provides specific guidelines for LLM agents performing code review
 Apply the **Module Responsibilities** section of [AGENTS.md](AGENTS.md) to new or
 substantially changed modules. Before approving/publishing:
 
+- Verify architecture changes are recorded in
+  [ARCHITECTURE_LEDGER.md](ARCHITECTURE_LEDGER.md), with implemented status and
+  evidence matching the code.
 - Trace the changed request/job path through transport, service, and persistence;
   verify each operation lives in its assigned layer.
 - Flag financial decisions in routers/repositories, transport concerns in business
