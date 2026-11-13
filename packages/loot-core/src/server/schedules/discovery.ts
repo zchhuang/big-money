@@ -1,4 +1,9 @@
-import { differenceInCalendarDays, getDate, subMonths } from 'date-fns';
+import {
+  addDays,
+  differenceInCalendarDays,
+  getDate,
+  subMonths,
+} from 'date-fns';
 
 import { RSchedule } from '#server/util/rschedule';
 import { dayFromDate, parseDate } from '#shared/months';
@@ -114,8 +119,18 @@ export function findLongPeriodSchedules(
   const result: DiscoveryCandidate[] = [];
   for (const group of groups.values()) {
     group.sort((a, b) => b.date.localeCompare(a.date));
+    const byDate = new Map<string, DiscoveryTransaction[]>();
+    for (const transaction of group) {
+      const bucket = byDate.get(transaction.date) ?? [];
+      bucket.push(transaction);
+      byDate.set(transaction.date, bucket);
+    }
+    const visitedAnchors = new Set<string>();
     // A later one-off purchase must not hide an older recurring series.
     for (const latest of group) {
+      const anchorKey = JSON.stringify([latest.date, latest.amount]);
+      if (visitedAnchors.has(anchorKey)) continue;
+      visitedAnchors.add(anchorKey);
       for (const months of [3, 12]) {
         const count = months === 12 ? 2 : 3;
         const config: RecurConfig = {
@@ -134,31 +149,40 @@ export function findLongPeriodSchedules(
           .occurrences({ take: count })
           .toArray()
           .map(occurrence => dayFromDate(occurrence.date));
-        const occurrences = dates.map(date => ({
-          date,
-          transactions: group.filter(
-            t =>
-              Math.abs(
-                differenceInCalendarDays(parseDate(t.date), parseDate(date)),
-              ) <= 2,
-          ),
-        }));
+        const evidenceDates = new Set<string>();
+        const occurrences = dates.map(date => {
+          const center = parseDate(date);
+          const transactions: DiscoveryTransaction[] = [];
+          for (let offset = -2; offset <= 2; offset++) {
+            const day = dayFromDate(addDays(center, offset));
+            evidenceDates.add(day);
+            transactions.push(...(byDate.get(day) ?? []));
+          }
+          return { date, transactions };
+        });
         const threshold = getApproxNumberThreshold(latest.amount);
-        const hasInterveningCharges = group.some(
-          transaction =>
-            transaction.date >= dates[0] &&
-            transaction.date <= dates[dates.length - 1] &&
-            Math.abs(transaction.amount - latest.amount) <= threshold &&
-            !dates.some(
-              date =>
-                Math.abs(
-                  differenceInCalendarDays(
-                    parseDate(transaction.date),
-                    parseDate(date),
-                  ),
-                ) <= 2,
-            ),
-        );
+        let hasInterveningCharges = false;
+        // The cadence spans at most one year. Inspect date buckets in that
+        // bounded interval, instead of rescanning all merchant history.
+        for (
+          let day = parseDate(dates[0]);
+          dayFromDate(day) <= dates[dates.length - 1];
+          day = addDays(day, 1)
+        ) {
+          const date = dayFromDate(day);
+          if (evidenceDates.has(date)) continue;
+          if (
+            byDate
+              .get(date)
+              ?.some(
+                transaction =>
+                  Math.abs(transaction.amount - latest.amount) <= threshold,
+              )
+          ) {
+            hasInterveningCharges = true;
+            break;
+          }
+        }
         // A long cadence cannot explain monthly/weekly matching charges between
         // its sample dates, even when both candidates would receive equal ranks.
         if (!hasInterveningCharges) {

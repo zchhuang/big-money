@@ -130,3 +130,15 @@ and completed-task reports. Their checks are historical results, not new reruns.
   persistence or interface contracts.
 - **Validation:** 74 schedule tests, full typecheck, and scoped lint passed.
   Exact-head CLI re-review remains the final gate before merging the PR.
+
+### 2026-11-12 — Bounded Historical Matching
+
+- **Workstream/branch:** W4, `codex/w4-recurring-discovery`.
+- **Review/change:** indexed merchant transactions by date, deduplicated identical
+  date/amount anchors, and bounded intervening-charge checks to each cadence's
+  date range. Evidence matching reads five date buckets per occurrence instead
+  of repeatedly parsing and scanning the full merchant history.
+- **Architecture:** transient in-memory index inside core discovery; persisted
+  models and service/UI boundaries are unchanged.
+- **Validation:** 74 tests, full typecheck, and scoped lint passed. Exact-head
+  CLI review remains the final publication gate; no new feature scope.
