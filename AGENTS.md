@@ -2,6 +2,14 @@
 
 This guide provides comprehensive information for AI agents (like Cursor) working with the Actual Budget codebase.
 
+## Big Money Fork Workstreams
+
+Before planning features, changing shared data models, or implementing a Big Money
+workstream, read [ROADMAP.md](ROADMAP.md) for scope, dependencies, milestones, and
+completion criteria. For Plaid setup and its current limitations, read
+[PLAID.md](PLAID.md). Treat roadmap items as planned until their acceptance
+criteria have recorded evidence.
+
 ## Project Overview
 
 **Actual Budget** is a local-first personal finance tool written in TypeScript/JavaScript. It's 100% free and open-source with synchronization capabilities across devices.
