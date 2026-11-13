@@ -126,6 +126,15 @@ and cannot initiate financial actions.
 
 ### W4. Subscriptions, Bills, and Recurring Activity
 
+**Progress (2026-11-12):** discovery/review first slice implemented on
+`codex/w4-recurring-discovery`: quarterly and annual candidates, merchant/account
+matching fixes, supporting transaction counts/dates, persistent dismissal/restore,
+and creation error handling. Ledger tests and browser acceptance cover these
+behaviors. This is partial W4.1 and review groundwork for W4.2; variable bills
+outside the existing amount tolerance, subscription classification, renewal/price
+alerts, and recurring totals remain planned. The current input is Actual's ledger;
+provider-to-ledger integration and cross-source transfer reconciliation remain W2.
+
 **Owns:** recurring detection, confirmed subscriptions, bill schedules, and alerts.
 
 - **W4.1 — Recurrence:** inspect Actual schedules and detect candidate merchants,

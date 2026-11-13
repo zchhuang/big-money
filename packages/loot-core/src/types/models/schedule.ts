@@ -49,4 +49,11 @@ export type DiscoverScheduleEntity = {
   date: RecurConfig;
   amount: ScheduleEntity['_amount'];
   _conditions: ScheduleEntity['_conditions'];
+  evidence?: {
+    transactionCount: number;
+    firstDate: string;
+    lastDate: string;
+    minAmount: number;
+    maxAmount: number;
+  };
 };
