@@ -14,6 +14,14 @@ Before changing architecture, storage ownership, shared contracts, or integratio
 boundaries, read [ARCHITECTURE_LEDGER.md](ARCHITECTURE_LEDGER.md). Record changed
 decisions and implementation evidence there in the same task.
 
+## Agent Change Ledger
+
+Before starting a task, read the latest and relevant entries in
+[AGENT_LEDGER.md](AGENT_LEDGER.md). After completing changes or a review, append
+an entry following its format: scope/branch, changes and decisions, checks and
+results, known commit references, and remaining work. Include the ledger update
+in the task commit; keep credentials and personal data out of it.
+
 ## Project Overview
 
 **Actual Budget** is a local-first personal finance tool written in TypeScript/JavaScript. It's 100% free and open-source with synchronization capabilities across devices.

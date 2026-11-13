@@ -1,8 +1,9 @@
 # Big Money Architecture Ledger
 
 This ledger records how Big Money is built, why its boundaries exist, and what
-remains incomplete. Entries below were recorded on 2026-11-12 against the current
-working branch. Implementation evidence is branch-specific until merged.
+remains incomplete. Initial entries were recorded on 2026-11-12. This ledger was reconciled with
+main on 2026-11-13 for W2 publication. Implementation evidence is branch-specific
+until merged.
 
 ## Current system map
 
@@ -94,7 +95,9 @@ These are planned work, not implemented architecture:
 - Profile identity, household sharing, and isolation beyond current budget scopes.
 - Gmail authorization and Venmo email ingestion, with any scraping job designed
   separately; PayPal and Fidelity connection paths still need validation.
-- Local-model execution and data access for assisted categorization.
+- Integration of the CLI categorization review and optional local model with
+  canonical financial ingestion; see [CATEGORIZATION.md](CATEGORIZATION.md) for
+  the implemented CLI workflow.
 - Portfolio ownership, valuation/history, and investment transaction semantics.
 - Refresh scheduling, reconciliation previews, and application of canonical data
   to the Actual ledger.

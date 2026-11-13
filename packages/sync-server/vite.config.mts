@@ -41,6 +41,10 @@ export default defineConfig({
           __dirname,
           'src/scripts/run-migrations.js',
         ),
+        'scripts/check-plaid-sandbox': path.resolve(
+          __dirname,
+          'src/scripts/check-plaid-sandbox.ts',
+        ),
         'scripts/reset-password': path.resolve(
           __dirname,
           'src/scripts/reset-password.js',

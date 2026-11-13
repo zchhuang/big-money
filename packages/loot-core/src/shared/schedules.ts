@@ -193,12 +193,14 @@ export function getHasTransactionsQuery(schedules) {
 }
 
 type ScheduleRuleOptions = IRuleOptions & {
+  byDayOfMonth?: number[];
+  byDayOfWeek?: [string, number][];
   frequency: string;
   interval?: number;
   byHourOfDay?: number[];
 };
 
-export function recurConfigToRSchedule(config) {
+export function recurConfigToRSchedule(config): ScheduleRuleOptions[] {
   const base: ScheduleRuleOptions = {
     start: monthUtils.parseDate(config.start),
     frequency: config.frequency.toUpperCase(),
@@ -234,13 +236,16 @@ export function recurConfigToRSchedule(config) {
         const days = config.patterns.filter(p => p.type === 'day');
         const dayNames = config.patterns.filter(p => p.type !== 'day');
 
-        return [
+        const rules: (ScheduleRuleOptions | false)[] = [
           days.length > 0 && { ...base, byDayOfMonth: days.map(p => p.value) },
           dayNames.length > 0 && {
             ...base,
             byDayOfWeek: dayNames.map(p => [abbrevDay(p.type), p.value]),
           },
-        ].filter(Boolean);
+        ];
+        return rules.filter(
+          (rule): rule is ScheduleRuleOptions => rule !== false,
+        );
       } else {
         // Nothing to do
         return [base];

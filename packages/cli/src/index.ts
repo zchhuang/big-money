@@ -3,6 +3,7 @@ import { Command, Option } from 'commander';
 import { registerAccountsCommand } from './commands/accounts';
 import { registerBudgetsCommand } from './commands/budgets';
 import { registerCategoriesCommand } from './commands/categories';
+import { registerCategorizeCommand } from './commands/categorize';
 import { registerCategoryGroupsCommand } from './commands/category-groups';
 import { registerPayeesCommand } from './commands/payees';
 import { registerQueryCommand } from './commands/query';
@@ -60,6 +61,7 @@ program
 registerAccountsCommand(program);
 registerBudgetsCommand(program);
 registerCategoriesCommand(program);
+registerCategorizeCommand(program);
 registerCategoryGroupsCommand(program);
 registerTransactionsCommand(program);
 registerPayeesCommand(program);

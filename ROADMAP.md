@@ -63,6 +63,13 @@ A fallback does not count as automatic connectivity.
 **Dependencies:** W2 defines the ingestion contract; W8 provides job operations
 and credential recovery. Independent connector work can proceed in parallel.
 
+**W1.1 kickoff delivered:** `bin/setup-plaid-sandbox.sh` guides developer-account
+and key setup; `plaid:check` validates Link creation and synthetic bank/account/
+transaction access with cleanup. Automated tests cover success, Production refusal,
+and failure cleanup. Live execution awaits the user's Sandbox keys. Connection UI,
+background refresh, and the other W1 milestones remain open; this is not a claim
+that W1.1 or W1 is complete.
+
 ### W2. Financial Data and Reconciliation
 
 **Progress (2026-11-12):** W2.1's internal model/storage contract is implemented
@@ -95,6 +102,13 @@ have explicit currency/precision rules and exclude incomplete/unverified data.
 
 ### W3. Categorization and Local AI
 
+**Delivery evidence (2026-11-12):** the first CLI slice provides the review queue,
+correction-based suggestions, optional local inference, approval/rejection/undo,
+and journal recovery. See [CATEGORIZATION.md](CATEGORIZATION.md) for the interface,
+validation commands, and remaining integration work. Real-model accuracy testing,
+the W7 interface, and profile/shared-feedback integration remain open; W3 is not
+fully complete.
+
 **Owns:** category suggestions, merchant cleanup, deterministic rules, feedback,
 and optional local inference.
 
@@ -118,6 +132,15 @@ and cannot initiate financial actions.
 **Dependencies:** W2; W6 supplies ownership and privacy rules before sharing.
 
 ### W4. Subscriptions, Bills, and Recurring Activity
+
+**Progress (2026-11-12):** discovery/review first slice implemented on
+`codex/w4-recurring-discovery`: quarterly and annual candidates, merchant/account
+matching fixes, supporting transaction counts/dates, persistent dismissal/restore,
+and creation error handling. Ledger tests and browser acceptance cover these
+behaviors. This is partial W4.1 and review groundwork for W4.2; variable bills
+outside the existing amount tolerance, subscription classification, renewal/price
+alerts, and recurring totals remain planned. The current input is Actual's ledger;
+provider-to-ledger integration and cross-source transfer reconciliation remain W2.
 
 **Owns:** recurring detection, confirmed subscriptions, bill schedules, and alerts.
 
