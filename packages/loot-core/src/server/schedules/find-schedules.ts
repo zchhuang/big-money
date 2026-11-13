@@ -9,9 +9,11 @@ import { conditionsToAQL } from '#server/transactions/transaction-rules';
 import { RSchedule } from '#server/util/rschedule';
 import { dayFromDate, parseDate } from '#shared/months';
 import { q } from '#shared/query';
-import { getApproxNumberThreshold } from '#shared/rules';
 import { recurConfigToRSchedule } from '#shared/schedules';
 import { groupBy } from '#shared/util';
+import type { DiscoverScheduleEntity } from '#types/models';
+
+import { findLongPeriodSchedules, matchScheduleOccurrences } from './discovery';
 
 function takeDates(config) {
   const schedule = new RSchedule({ rrules: recurConfigToRSchedule(config) });
@@ -38,71 +40,6 @@ async function getTransactions(date, account) {
       .options({ splits: 'none' }),
   );
   return data;
-}
-
-function getRank(day1, day2) {
-  const dayDiff = Math.abs(
-    d.differenceInDays(parseDate(day1), parseDate(day2)),
-  );
-
-  // The amount of days off determines the rank: exact same day
-  // is highest rank 1, 1 day off is .5, etc. This will find the
-  // best start date that matches all the dates the closest
-  return 1 / (dayDiff + 1);
-}
-
-function matchSchedules(allOccurs, config) {
-  allOccurs = [...allOccurs].reverse();
-  const baseOccur = allOccurs[0];
-  const occurs = allOccurs.slice(1);
-  const schedules = [];
-
-  for (const trans of baseOccur.transactions) {
-    const threshold = getApproxNumberThreshold(trans.amount);
-    const payee = trans.payee;
-
-    const found = occurs.map(occur => {
-      let matched = occur.transactions.find(
-        t =>
-          t.amount >= trans.amount - threshold &&
-          t.amount <= trans.amount + threshold,
-      );
-      matched = matched && matched.payee === payee ? matched : null;
-
-      if (matched) {
-        return { trans: matched, rank: getRank(occur.date, matched.date) };
-      }
-      return null;
-    });
-
-    if (found.indexOf(null) !== -1) {
-      continue;
-    }
-
-    const rank = found.reduce(
-      (total, match) => total + match.rank,
-      getRank(baseOccur.date, trans.date),
-    );
-
-    const exactAmount = found.reduce(
-      (exact, match) => exact && match.trans.amount === trans.amount,
-      true,
-    );
-
-    schedules.push({
-      rank,
-      amount: trans.amount,
-      account: trans.account,
-      payee: trans.payee,
-      date: config,
-      // Exact dates rank as 1, so all of them matches exactly it
-      // would equal the number of `allOccurs`
-      exactDate: rank === allOccurs.length,
-      exactAmount,
-    });
-  }
-
-  return schedules;
 }
 
 async function schedulesForPattern(baseStart, numDays, baseConfig, accountId) {
@@ -134,7 +71,7 @@ async function schedulesForPattern(baseStart, numDays, baseConfig, accountId) {
       });
     }
 
-    schedules = schedules.concat(matchSchedules(data, config));
+    schedules = schedules.concat(matchScheduleOccurrences(data, config));
   }
   return schedules;
 }
@@ -316,7 +253,7 @@ async function findStartDate(schedule) {
   return schedule;
 }
 
-export async function findSchedules() {
+export async function findSchedules(): Promise<DiscoverScheduleEntity[]> {
   // Patterns to look for:
   // * Weekly
   // * Every two weeks
@@ -342,7 +279,19 @@ export async function findSchedules() {
 
     if (latestTrans) {
       const latestDate = fromDateRepr(latestTrans.date);
+      const { data: history } = await aqlQuery(
+        q('transactions')
+          .filter({
+            account: account.id,
+            schedule: null,
+            'payee.transfer_acct': null,
+            date: { $lte: latestDate },
+          })
+          .select('*')
+          .options({ splits: 'none' }),
+      );
       allSchedules = allSchedules.concat(
+        findLongPeriodSchedules(history),
         await weekly(latestDate, account.id),
         await every2weeks(latestDate, account.id),
         await monthly(latestDate, account.id),
@@ -353,7 +302,11 @@ export async function findSchedules() {
     }
   }
 
-  const schedules = [...groupBy(allSchedules, 'payee').entries()].map(
+  const grouped = allSchedules.map(s => ({
+    ...s,
+    group: JSON.stringify([s.account, s.payee, Math.sign(s.amount)]),
+  }));
+  const schedules = [...groupBy(grouped, 'group').entries()].map(
     ([, schedules]) => {
       schedules.sort((s1, s2) => s2.rank - s1.rank);
       const winner = schedules[0];
@@ -365,6 +318,7 @@ export async function findSchedules() {
         payee: winner.payee,
         date: winner.date,
         amount: winner.amount,
+        evidence: winner.evidence,
         _conditions: [
           { op: 'is', field: 'account', value: winner.account },
           { op: 'is', field: 'payee', value: winner.payee },
