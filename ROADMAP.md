@@ -65,6 +65,13 @@ and credential recovery. Independent connector work can proceed in parallel.
 
 ### W2. Financial Data and Reconciliation
 
+**Progress (2026-11-12):** W2.1's internal model/storage contract is implemented
+in `packages/sync-server/src/financial/`. See [FINANCIAL_DATA.md](FINANCIAL_DATA.md)
+for the connector sequence, exact money/identity rules, and ledger projection
+contract. Synthetic tests verify replay and pending/posting/removal behavior.
+Client-side ledger application and the W2.2/W2.3 workflows remain open; the
+workstream's full acceptance gate is not complete.
+
 **Owns:** provider-to-application mapping, canonical transactions/accounts,
 provenance, reconciliation, and Actual ledger projection.
 
