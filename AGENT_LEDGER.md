@@ -86,3 +86,19 @@ and completed-task reports. Their checks are historical results, not new reruns.
   type-aware lint passed.
 - **Handoff:** continue W4 from its remaining roadmap milestones; unrelated
   workstreams and `main` remain untouched by this task branch.
+
+### 2026-11-12 — W4 Publication Review
+
+- **Workstream/branch:** W4, `codex/w4-recurring-discovery`; implementation and
+  prior fixes through `c2d3c3ec3`, publishing against `origin/main`.
+- **Architecture:** recurrence matching stays in core schedule helpers; the
+  schedule service reads ledger history and produces candidates. The review UI
+  consumes candidate evidence and existing schedule-creation APIs. Dismissals use
+  synced budget preferences; this slice adds no database schema or provider API.
+- **Agent guidance:** checked `AGENTS.md` and roadmap pointers; the ledger guidance
+  remains accurate. This entry records module ownership and storage for handoff.
+- **Validation:** prior implementation checks passed (72 tests, browser workflow,
+  production build, typecheck, lint). Exact-head CLI review and remote PR checks
+  are publication gates; their results are reported with the final PR outcome.
+- **Remaining:** the unimplemented W4 milestones above remain deferred. Publishing
+  this slice does not establish subscription classification or provider coverage.
