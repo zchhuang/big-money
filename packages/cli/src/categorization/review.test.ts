@@ -118,6 +118,68 @@ describe('review and correction workflow', () => {
       },
     ]);
   });
+  it.each(['undo', 'edit'])(
+    'invalidates cached corrections after an example %s',
+    async change => {
+      const first = await review().approve('one', 'food');
+      await review().approve('two', 'food');
+      await review().suggest();
+      if (change === 'undo') await review().undo(first.id);
+      else transactions[0].category = 'travel';
+      await expect(review().approve('three')).rejects.toThrow(
+        'eligible category',
+      );
+      expect(
+        (await review().queue()).find(t => t.id === 'three')?.suggestion,
+      ).toBeUndefined();
+      expect(transactions[2].category).toBeNull();
+    },
+  );
+  it('learns corrections after a model abstains without retrying the model', async () => {
+    const local = { suggest: vi.fn(async () => null) };
+    await review(local).suggest();
+    await review().approve('one', 'food');
+    await review().approve('two', 'food');
+    expect(await review().suggest()).toMatchObject([
+      { transactionId: 'three', suggestion: { source: 'correction' } },
+    ]);
+    expect(local.suggest).toHaveBeenCalledTimes(3);
+  });
+  it.each(['missing', 'ineligible'])(
+    'continues recovery after a %s transaction',
+    async change => {
+      const original = ledger.setCategory;
+      ledger.setCategory = async () => {
+        throw new Error('crash');
+      };
+      await expect(review().approve('one', 'food')).rejects.toThrow();
+      await expect(review().approve('two', 'food')).rejects.toThrow();
+      if (change === 'missing') transactions.shift();
+      else transactions[0].eligible = false;
+      ledger.setCategory = original;
+      expect(await review().recover()).toMatchObject([
+        { state: 'conflict' },
+        { state: 'applied' },
+      ]);
+      expect(transactions.find(t => t.id === 'two')?.category).toBe('food');
+    },
+  );
+  it('reaches learned matches beyond a batch of unresolved model-free entries', async () => {
+    await review().approve('one', 'food');
+    await review().approve('two', 'food');
+    transactions.splice(
+      2,
+      0,
+      ...Array.from({ length: 101 }, (_, index) =>
+        transaction(`unmatched-${index}`, { payee: 'unmatched' }),
+      ),
+    );
+    expect(
+      (await review().suggest({ limit: 1 })).find(
+        t => t.transactionId === 'three',
+      ),
+    ).toMatchObject({ suggestion: { source: 'correction' } });
+  });
   it('does not learn when approved examples disagree, or have changed in the ledger', async () => {
     await review().approve('one', 'food');
     await review().approve('two', 'travel');

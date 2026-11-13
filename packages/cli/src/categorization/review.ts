@@ -95,6 +95,28 @@ export function createCategorizationReview(
       source: 'correction',
     };
   }
+  function validateSuggestion(
+    saved: ReviewEntry,
+    transaction: ReviewTransaction,
+    categories: ReviewCategory[],
+    transactions: ReviewTransaction[],
+  ) {
+    if (!saved.suggestion || saved.state === 'rejected') return;
+    const correction =
+      saved.suggestion.source === 'correction'
+        ? learned(transaction, categories, transactions)
+        : undefined;
+    if (
+      !categories.some(c => c.id === saved.suggestion?.category) ||
+      (saved.suggestion.source === 'correction' &&
+        correction?.category !== saved.suggestion.category)
+    ) {
+      saved.state = 'pending';
+      delete saved.suggestion;
+    } else if (correction) {
+      saved.suggestion = correction;
+    }
+  }
   async function current(id: string) {
     const tx = (await ledger.transactions()).find(tx => tx.id === id);
     if (!tx?.eligible) {
@@ -112,15 +134,7 @@ export function createCategorizationReview(
         .filter(t => t.eligible && !t.category)
         .map(transaction => {
           const saved = entry(transaction);
-          if (
-            saved.suggestion &&
-            !eligibleCategories(transaction, categories).some(
-              c => c.id === saved.suggestion?.category,
-            )
-          ) {
-            saved.state = 'pending';
-            delete saved.suggestion;
-          }
+          validateSuggestion(saved, transaction, categories, transactions);
           return { ...transaction, ...saved };
         });
       persistence.save();
@@ -140,32 +154,26 @@ export function createCategorizationReview(
         state: string;
         suggestion?: Suggestion;
       }[] = [];
+      let attempts = 0;
       for (const tx of transactions.filter(t => t.eligible && !t.category)) {
-        if (results.length >= limit) break;
+        if (attempts >= limit) break;
         const saved = entry(tx);
         const allowed = eligibleCategories(tx, categories);
-        if (
-          saved.suggestion &&
-          !allowed.some(c => c.id === saved.suggestion?.category)
-        ) {
-          saved.state = 'pending';
-          delete saved.suggestion;
-        }
-        if (
-          saved.state === 'rejected' ||
-          saved.state === 'suggested' ||
-          (saved.state === 'abstained' && !retry)
-        ) {
-          continue;
-        }
-        if (
-          !retry &&
-          saved.state === 'retry' &&
-          (saved.attempts >= 5 || (saved.retryAt ?? 0) > now())
-        ) {
+        validateSuggestion(saved, tx, allowed, transactions);
+        if (saved.state === 'rejected' || saved.state === 'suggested') {
           continue;
         }
         const correction = learned(tx, allowed, transactions);
+        if (
+          !correction &&
+          !retry &&
+          (saved.state === 'abstained' ||
+            (saved.state === 'retry' &&
+              (saved.attempts >= 5 || (saved.retryAt ?? 0) > now())))
+        ) {
+          continue;
+        }
+        if (correction || model) attempts++;
         try {
           const proposal = correction ?? (await model?.suggest(tx, allowed));
           if (
@@ -222,12 +230,13 @@ export function createCategorizationReview(
           'Transaction already categorized; explicit decisions are preserved',
         );
       }
+      const categories = await ledger.categories();
+      validateSuggestion(saved, tx, categories, await ledger.transactions());
+      persistence.save();
       const category = categoryId ?? saved.suggestion?.category;
       if (
         !category ||
-        !eligibleCategories(tx, await ledger.categories()).some(
-          c => c.id === category,
-        )
+        !eligibleCategories(tx, categories).some(c => c.id === category)
       ) {
         throw new Error(
           'Choose an eligible category or generate a suggestion first',
@@ -308,8 +317,10 @@ export function createCategorizationReview(
       for (const decision of state.decisions.filter(d =>
         ['applying', 'undoing'].includes(d.status),
       )) {
-        const tx = await current(decision.transactionId);
-        if (fingerprint(tx) !== decision.fingerprint) {
+        const tx = (await ledger.transactions()).find(
+          transaction => transaction.id === decision.transactionId,
+        );
+        if (!tx?.eligible || fingerprint(tx) !== decision.fingerprint) {
           results.push({ decisionId: decision.id, state: 'conflict' });
           continue;
         }
