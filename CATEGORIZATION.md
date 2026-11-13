@@ -65,8 +65,17 @@ may require another CLI invocation to finish pushing local ledger changes.
 
 ## Optional Local Model
 
-Set the name of an already installed model and an OpenAI-compatible local chat
-completion endpoint:
+Copy `.env.local-llm.example` to `.local-data/local-llm.env` (create the directory
+first), then fill in your installed model's identifier and local endpoint. The
+private copy is ignored by Git. Load it before running the CLI:
+
+```sh
+set -a
+source .local-data/local-llm.env
+set +a
+```
+
+Alternatively, export the settings directly:
 
 ```sh
 export ACTUAL_LOCAL_MODEL='YOUR_INSTALLED_MODEL_WITH_VERSION_TAG'
