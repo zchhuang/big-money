@@ -36,7 +36,7 @@ export type Decision = {
   category: string;
   fingerprint: string;
   suggestion?: Suggestion;
-  status: 'applying' | 'applied' | 'undoing' | 'undone';
+  status: 'applying' | 'applied' | 'undoing' | 'undone' | 'conflicted';
   createdAt: string;
 };
 export type ReviewState = {

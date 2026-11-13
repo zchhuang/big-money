@@ -114,7 +114,7 @@ function validateState(
       !(decision.previous === null || typeof decision.previous === 'string') ||
       typeof decision.category !== 'string' ||
       typeof decision.fingerprint !== 'string' ||
-      !['applying', 'applied', 'undoing', 'undone'].includes(
+      !['applying', 'applied', 'undoing', 'undone', 'conflicted'].includes(
         String(decision.status),
       ) ||
       typeof decision.createdAt !== 'string' ||

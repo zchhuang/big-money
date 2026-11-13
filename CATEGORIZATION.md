@@ -59,7 +59,8 @@ confidence represents an exact heuristic match, not a statistical guarantee.
 `reject` persists dismissal for the current transaction version. `undo` restores
 the prior category only if the approved transaction still matches. `recover`
 resumes journaled approval/undo after interruption, preserving conflicting manual
-changes. Inspect conflicts before changing the ledger; API synchronization errors
+changes. Conflicts are recorded as terminal journal decisions so a fresh review
+can proceed; recovery never retries those writes. Inspect conflicts before changing the ledger; API synchronization errors
 may require another CLI invocation to finish pushing local ledger changes.
 
 ## Optional Local Model

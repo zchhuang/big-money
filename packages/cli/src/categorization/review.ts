@@ -321,6 +321,8 @@ export function createCategorizationReview(
           transaction => transaction.id === decision.transactionId,
         );
         if (!tx?.eligible || fingerprint(tx) !== decision.fingerprint) {
+          decision.status = 'conflicted';
+          persistence.save();
           results.push({ decisionId: decision.id, state: 'conflict' });
           continue;
         }
@@ -333,10 +335,14 @@ export function createCategorizationReview(
             ? decision.previous
             : decision.category;
         if (tx.category !== target && tx.category !== previous) {
+          decision.status = 'conflicted';
+          persistence.save();
           results.push({ decisionId: decision.id, state: 'conflict' });
           continue;
         }
         if (target && !(await ledger.categories()).some(c => c.id === target)) {
+          decision.status = 'conflicted';
+          persistence.save();
           results.push({ decisionId: decision.id, state: 'conflict' });
           continue;
         }

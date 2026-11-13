@@ -255,6 +255,21 @@ describe('review and correction workflow', () => {
     expect(await review().recover()).toMatchObject([{ state: 'applied' }]);
     expect(transactions[0].category).toBe('food');
   });
+  it('records recovery conflicts and permits a fresh explicit decision', async () => {
+    const original = ledger.setCategory;
+    ledger.setCategory = async () => {
+      throw new Error('crash');
+    };
+    await expect(review().approve('one', 'food')).rejects.toThrow();
+    transactions[0].amount = -2000;
+    ledger.setCategory = original;
+    expect(await review().recover()).toMatchObject([{ state: 'conflict' }]);
+    expect(writes).toEqual([]);
+    expect(review().history()[0].status).toBe('conflicted');
+    expect(await review().recover()).toEqual([]);
+    await review().approve('one', 'travel');
+    expect(transactions[0].category).toBe('travel');
+  });
   it('recognizes a ledger write that succeeded before the journal completion', async () => {
     const original = ledger.setCategory;
     ledger.setCategory = async (id, category) => {
