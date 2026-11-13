@@ -160,6 +160,11 @@ export function findLongPeriodSchedules(
           }
           return { date, transactions };
         });
+        // Match this anchor only: another amount in the same date window has
+        // its own anchor and must use its own intervening-charge threshold.
+        occurrences[occurrences.length - 1].transactions = occurrences[
+          occurrences.length - 1
+        ].transactions.filter(transaction => transaction.id === latest.id);
         const threshold = getApproxNumberThreshold(latest.amount);
         let hasInterveningCharges = false;
         // The cadence spans at most one year. Inspect date buckets in that

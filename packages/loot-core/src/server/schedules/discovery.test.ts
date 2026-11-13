@@ -168,4 +168,14 @@ describe('quarterly and annual recurrence', () => {
     expect(candidates[0].date.frequency).toBe('yearly');
     expect(candidates[0].evidence.lastDate).toBe('2026-01-01');
   });
+  it('does not let a differently priced same-day purchase bypass monthly evidence', () => {
+    expect(
+      findLongPeriodSchedules([
+        ...['01', '02', '03', '04', '05', '06', '07'].map(month =>
+          transaction(`2026-${month}-01`),
+        ),
+        transaction('2026-07-01', { id: 'one-off', amount: -50000 }),
+      ]),
+    ).toEqual([]);
+  });
 });

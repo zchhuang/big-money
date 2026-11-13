@@ -153,3 +153,14 @@ and completed-task reports. Their checks are historical results, not new reruns.
   ownership remain accurate.
 - **Validation:** 75 schedule tests, full typecheck, and scoped lint passed.
   Exact-head re-review remains the final publication gate.
+
+### 2026-11-12 — Anchor Amount Consistency
+
+- **Workstream/branch:** W4, `codex/w4-recurring-discovery`.
+- **Review/change:** same-day purchases of a different amount could emit another
+  series using the wrong intervening-charge threshold. Match each anchor's own
+  transaction in the final evidence window; other transactions receive their own
+  anchors and amount checks. Added monthly-plus-same-day-purchase regression.
+- **Architecture:** core discovery correction; no storage or interface changes.
+- **Validation:** 76 schedule tests, full typecheck, and scoped lint passed.
+  Exact-head CLI review remains the final gate.
