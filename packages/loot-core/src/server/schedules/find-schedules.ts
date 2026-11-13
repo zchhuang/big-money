@@ -310,8 +310,8 @@ export async function findSchedules(): Promise<DiscoverScheduleEntity[]> {
     ([, schedules]) => {
       schedules.sort(
         (s1, s2) =>
-          s2.rank - s1.rank ||
-          s2.evidence.lastDate.localeCompare(s1.evidence.lastDate),
+          s2.evidence.lastDate.localeCompare(s1.evidence.lastDate) ||
+          s2.rank - s1.rank,
       );
       const winner = schedules[0];
 

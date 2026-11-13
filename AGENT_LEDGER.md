@@ -142,3 +142,14 @@ and completed-task reports. Their checks are historical results, not new reruns.
   models and service/UI boundaries are unchanged.
 - **Validation:** 74 tests, full typecheck, and scoped lint passed. Exact-head
   CLI review remains the final publication gate; no new feature scope.
+
+### 2026-11-12 — Current Evidence Before Precision
+
+- **Workstream/branch:** W4, `codex/w4-recurring-discovery`.
+- **Review/change:** a follow-up identified that date-shifted current billing can
+  score below exact historical billing. Rank evidence recency first, then date
+  precision, and cover both exact and shifted monthly transitions in ledger tests.
+- **Architecture:** discovery-service ranking only; existing storage and module
+  ownership remain accurate.
+- **Validation:** 75 schedule tests, full typecheck, and scoped lint passed.
+  Exact-head re-review remains the final publication gate.
