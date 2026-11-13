@@ -2,6 +2,14 @@
   <img src="/demo.png" alt="Actualbudget" />
 </p>
 
+## Big Money: Plaid Sandbox Setup
+
+For this fork's bank-connector setup, run `bash bin/setup-plaid-sandbox.sh` from
+the repository root. It guides you through Plaid account/key setup, keeps secrets
+local, and validates a disposable Sandbox connection before enabling Plaid.
+See [PLAID.md](PLAID.md) for prerequisites and the remaining connection workflow,
+and [ROADMAP.md](ROADMAP.md) for workstreams and milestones.
+
 ## Getting Started
 
 Actual is a local-first personal finance tool. It is 100% free and open-source, written in NodeJS, it has a synchronization element so that all your changes can move between devices without any heavy lifting.

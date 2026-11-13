@@ -63,6 +63,13 @@ A fallback does not count as automatic connectivity.
 **Dependencies:** W2 defines the ingestion contract; W8 provides job operations
 and credential recovery. Independent connector work can proceed in parallel.
 
+**W1.1 kickoff delivered:** `bin/setup-plaid-sandbox.sh` guides developer-account
+and key setup; `plaid:check` validates Link creation and synthetic bank/account/
+transaction access with cleanup. Automated tests cover success, Production refusal,
+and failure cleanup. Live execution awaits the user's Sandbox keys. Connection UI,
+background refresh, and the other W1 milestones remain open; this is not a claim
+that W1.1 or W1 is complete.
+
 ### W2. Financial Data and Reconciliation
 
 **Owns:** provider-to-application mapping, canonical transactions/accounts,
