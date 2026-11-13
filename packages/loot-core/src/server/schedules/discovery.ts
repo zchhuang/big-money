@@ -1,7 +1,9 @@
-import { differenceInCalendarDays, subMonths } from 'date-fns';
+import { differenceInCalendarDays, getDate, subMonths } from 'date-fns';
 
+import { RSchedule } from '#server/util/rschedule';
 import { dayFromDate, parseDate } from '#shared/months';
 import { getApproxNumberThreshold } from '#shared/rules';
+import { recurConfigToRSchedule } from '#shared/schedules';
 import type { DiscoverScheduleEntity, RecurConfig } from '#types/models';
 
 export type DiscoveryTransaction = {
@@ -115,27 +117,52 @@ export function findLongPeriodSchedules(
     const latest = group[0];
     for (const months of [3, 12]) {
       const count = months === 12 ? 2 : 3;
-      const occurrences = Array.from({ length: count }, (_, index) => {
-        const date = dayFromDate(
-          subMonths(parseDate(latest.date), months * (count - index - 1)),
-        );
-        return {
-          date,
-          transactions: group.filter(
-            t =>
+      const config: RecurConfig = {
+        start: dayFromDate(
+          subMonths(parseDate(latest.date), months * (count - 1)),
+        ),
+        frequency: months === 12 ? 'yearly' : 'monthly',
+        ...(months === 3 ? { interval: 3 } : {}),
+        ...(months === 3 && getDate(parseDate(latest.date)) > 28
+          ? { patterns: [{ type: 'day', value: -1 }] }
+          : {}),
+      };
+      // Use the actual recurrence engine's dates, including month-end and leap
+      // behavior. Evidence must match the rule we will later create.
+      const dates = new RSchedule({ rrules: recurConfigToRSchedule(config) })
+        .occurrences({ take: count })
+        .toArray()
+        .map(occurrence => dayFromDate(occurrence.date));
+      const occurrences = dates.map(date => ({
+        date,
+        transactions: group.filter(
+          t =>
+            Math.abs(
+              differenceInCalendarDays(parseDate(t.date), parseDate(date)),
+            ) <= 2,
+        ),
+      }));
+      const threshold = getApproxNumberThreshold(latest.amount);
+      const hasInterveningCharges = group.some(
+        transaction =>
+          transaction.date >= dates[0] &&
+          transaction.date <= dates[dates.length - 1] &&
+          Math.abs(transaction.amount - latest.amount) <= threshold &&
+          !dates.some(
+            date =>
               Math.abs(
-                differenceInCalendarDays(parseDate(t.date), parseDate(date)),
+                differenceInCalendarDays(
+                  parseDate(transaction.date),
+                  parseDate(date),
+                ),
               ) <= 2,
           ),
-        };
-      });
-      result.push(
-        ...matchScheduleOccurrences(occurrences, {
-          start: occurrences[0].date,
-          frequency: months === 12 ? 'yearly' : 'monthly',
-          ...(months === 3 ? { interval: 3 } : {}),
-        }),
       );
+      // A long cadence cannot explain monthly/weekly matching charges between
+      // its sample dates, even when both candidates would receive equal ranks.
+      if (!hasInterveningCharges) {
+        result.push(...matchScheduleOccurrences(occurrences, config));
+      }
     }
   }
   return result;
