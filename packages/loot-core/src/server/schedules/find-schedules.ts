@@ -308,7 +308,11 @@ export async function findSchedules(): Promise<DiscoverScheduleEntity[]> {
   }));
   const schedules = [...groupBy(grouped, 'group').entries()].map(
     ([, schedules]) => {
-      schedules.sort((s1, s2) => s2.rank - s1.rank);
+      schedules.sort(
+        (s1, s2) =>
+          s2.rank - s1.rank ||
+          s2.evidence.lastDate.localeCompare(s1.evidence.lastDate),
+      );
       const winner = schedules[0];
 
       // Convert to schedule and return it

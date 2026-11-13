@@ -119,3 +119,14 @@ and completed-task reports. Their checks are historical results, not new reruns.
   CLI re-review of the resulting head remains the final publication gate.
 - **Handoff:** the PR stayed open while these findings were resolved; remaining
   W4 milestone scope is unchanged.
+
+### 2026-11-12 — Current Cadence Tie-Breaking
+
+- **Workstream/branch:** W4, `codex/w4-recurring-discovery`.
+- **Review/change:** historical anchors exposed an equal-score tie between old
+  quarterly and current monthly billing. Discovery now prefers newer evidence
+  when scores tie, with a real-ledger cadence-transition regression.
+- **Architecture:** ranking remains in the existing discovery service; no new
+  persistence or interface contracts.
+- **Validation:** 74 schedule tests, full typecheck, and scoped lint passed.
+  Exact-head CLI re-review remains the final gate before merging the PR.

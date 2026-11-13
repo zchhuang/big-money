@@ -87,4 +87,26 @@ describe('schedule discovery against the budget ledger', () => {
     expect(suggestions[0].date.frequency).toBe('monthly');
     expect(suggestions[0].date.interval ?? 1).toBe(1);
   });
+  it('prefers current monthly billing over equally ranked historical quarterly billing', async () => {
+    const account = await db.insertAccount({
+      name: 'Card',
+      offbudget: 0,
+      closed: 0,
+    });
+    const payee = await db.insertPayee({ name: 'Changed cadence' });
+    await loadMappings();
+    for (const month of ['01', '04', '07', '08', '09', '10', '11']) {
+      await db.insertTransaction({
+        account,
+        payee,
+        date: `2026-${month}-01`,
+        amount: -9900,
+      });
+    }
+    const suggestions = await findSchedules();
+    expect(suggestions).toHaveLength(1);
+    expect(suggestions[0].date.frequency).toBe('monthly');
+    expect(suggestions[0].date.interval ?? 1).toBe(1);
+    expect(suggestions[0].evidence?.lastDate).toBe('2026-10-01');
+  });
 });
