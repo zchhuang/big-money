@@ -63,6 +63,13 @@ A fallback does not count as automatic connectivity.
 **Dependencies:** W2 defines the ingestion contract; W8 provides job operations
 and credential recovery. Independent connector work can proceed in parallel.
 
+**W1.1 kickoff delivered:** `bin/setup-plaid-sandbox.sh` guides developer-account
+and key setup; `plaid:check` validates Link creation and synthetic bank/account/
+transaction access with cleanup. Automated tests cover success, Production refusal,
+and failure cleanup. Live execution awaits the user's Sandbox keys. Connection UI,
+background refresh, and the other W1 milestones remain open; this is not a claim
+that W1.1 or W1 is complete.
+
 ### W2. Financial Data and Reconciliation
 
 **Owns:** provider-to-application mapping, canonical transactions/accounts,
@@ -87,6 +94,13 @@ have explicit currency/precision rules and exclude incomplete/unverified data.
 **Dependencies:** W1 source samples. W3, W4, W5, and W9 consume these contracts.
 
 ### W3. Categorization and Local AI
+
+**Delivery evidence (2026-11-12):** the first CLI slice provides the review queue,
+correction-based suggestions, optional local inference, approval/rejection/undo,
+and journal recovery. See [CATEGORIZATION.md](CATEGORIZATION.md) for the interface,
+validation commands, and remaining integration work. Real-model accuracy testing,
+the W7 interface, and profile/shared-feedback integration remain open; W3 is not
+fully complete.
 
 **Owns:** category suggestions, merchant cleanup, deterministic rules, feedback,
 and optional local inference.
