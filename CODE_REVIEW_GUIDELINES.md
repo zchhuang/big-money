@@ -2,6 +2,24 @@
 
 This document provides specific guidelines for LLM agents performing code reviews on the Actual Budget codebase. These guidelines help maintain code quality, consistency, and follow the project's design principles.
 
+## Module Responsibilities
+
+Apply the **Module Responsibilities** section of [AGENTS.md](AGENTS.md) to new or
+substantially changed modules. Before approving/publishing:
+
+- Trace the changed request/job path through transport, service, and persistence;
+  verify each operation lives in its assigned layer.
+- Flag financial decisions in routers/repositories, transport concerns in business
+  functions, and SQL/network access in models or pure projections.
+- Check that extracted logic preserves authorization, scope, error behavior, and
+  transaction atomicity. A file move alone is not evidence that the seam is sound.
+- Require meaningful behavior coverage through the module interface, plus direct
+  tests for substantial pure transformations. Preserve real-storage integration
+  coverage for persistence and rollback.
+- Accept smaller modules with fewer layers when responsibilities are clear. Request
+  concrete separation rather than empty wrappers, speculative interfaces, or one
+  file for every function.
+
 ## Settings Proliferation
 
 **Do NOT add new settings for every little UI tweak.**

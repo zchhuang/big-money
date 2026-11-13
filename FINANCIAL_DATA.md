@@ -6,6 +6,19 @@ there are no new public HTTP routes or automatic writes to Actual's ledger.
 W1 callers can use this contract without implementing their own identity, source
 revision, money conversion, or pending/posted logic.
 
+## Module Structure
+
+`models.ts` contains data contracts; `schema.ts` and the migration define storage.
+`repository.ts` owns scoped SQL, encryption, and atomic persistence primitives.
+`service.ts` owns validation, account mappings, revision/pending decisions, and the
+atomic ingestion operation. `projection.ts` converts domain records to an Actual
+ledger plan using only supplied records/accounts. `plaid.ts` normalizes provider
+data; `money.ts` performs exact calculations. `store.ts` preserves the original
+`createFinancialStore` entry point by composing repository and service.
+
+There is no HTTP router until an authenticated endpoint is actually needed.
+Connector/job callers continue using the existing public interface in `index.ts`.
+
 ## Scope and Storage
 
 Construct `createFinancialStore(database, vault, authorizedFileId)` with the

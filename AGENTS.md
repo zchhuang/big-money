@@ -283,6 +283,34 @@ directory (e.g. `.claude/skills/impeccable/`) is missing, install it with
 
 ## Code Style & Conventions
 
+### Module Responsibilities
+
+For new modules and substantial changes, separate responsibilities within each
+feature rather than collecting unrelated features in global layer files:
+
+| File or layer                  | Owns                                                                                          |
+| ------------------------------ | --------------------------------------------------------------------------------------------- |
+| `models.ts`                    | Data types and contracts; no persistence, transport, or orchestration                         |
+| `schema.ts` / migrations       | Database structure and version changes                                                        |
+| `repository.ts`                | Scoped SQL/storage access, encryption, and atomic persistence primitives                      |
+| `service.ts`                   | Business validation, state transitions, and orchestration; chooses the atomic operation scope |
+| `projection.ts`                | Pure transformations into ledger/read models when conversion is substantial                   |
+| `router.ts` / API              | Authentication/authorization, transport validation, service calls, and HTTP responses         |
+| Provider adapter/client        | Provider-specific normalization and external requests                                         |
+| `index.ts` / composition entry | Small public interface and dependency assembly                                                |
+
+Dependency flow is transport → service → repository; models and pure calculations
+remain usable without HTTP or storage. Services receive their storage/provider
+dependencies. Keep financial rules out of routers and repositories, and keep SQL,
+network calls, and side effects out of pure projections. Preserve authorization
+and transaction atomicity when moving logic between files.
+
+Split by responsibility, not file size. Small modules need only the layers they
+use; add an HTTP router when there is an actual endpoint to expose. Keep integration
+tests with real storage, and test business calculations/projections directly where
+useful. Review changes against these responsibilities before publishing; see
+[CODE_REVIEW_GUIDELINES.md](CODE_REVIEW_GUIDELINES.md).
+
 ### TypeScript Guidelines
 
 **Type Usage:**

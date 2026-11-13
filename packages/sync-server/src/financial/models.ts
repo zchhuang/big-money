@@ -43,6 +43,10 @@ export type FinancialTransaction = Omit<
   source: Source;
   settlement: 'pending' | 'posted';
 };
+export type StoredFinancialTransaction = {
+  value: FinancialTransaction;
+  actualTransactionId: string | null;
+};
 export type IngestionResult = {
   externalId: string;
   id: string;

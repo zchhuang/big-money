@@ -11,6 +11,14 @@ Before creating any git commit or pull request in this repo, read:
 
 It is the authoritative source for the rules you must apply yourself: the `[AI]` PR-title prefix and leaving the PR template blank (and the Chinese exception). The mechanical commit/git rules are enforced by tooling and aren't restated there. Read it on every commit/PR session so any updates are picked up automatically.
 
+## Architecture Before Publishing
+
+For code changes, apply the Module Responsibilities sections in `AGENTS.md` and
+`CODE_REVIEW_GUIDELINES.md` before committing and pushing. Trace affected paths to
+verify the model, service, repository, projection, and transport responsibilities;
+resolve task-related violations and retain authorization/atomicity coverage.
+Small modules need only the layers their behavior requires.
+
 ## The one rule worth restating
 
 Every commit message and every pull request title MUST begin with `[AI]`. Commit messages are checked by the git-guard hook (a missing prefix is blocked before the commit lands), so the one that needs _your_ attention is the PR title — nothing checks it for you, and the cost of forgetting it is high since the PR has to be renamed by hand. Examples:
