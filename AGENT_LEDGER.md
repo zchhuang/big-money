@@ -164,3 +164,19 @@ and completed-task reports. Their checks are historical results, not new reruns.
 - **Architecture:** core discovery correction; no storage or interface changes.
 - **Validation:** 76 schedule tests, full typecheck, and scoped lint passed.
   Exact-head CLI review remains the final gate.
+
+### 2026-11-13 — W2 Publication Integration and Validation
+
+- **Workstream/branch:** W2, `codex/w2-financial-data`; implementation
+  `dde7015ed`, separation `80aabb531`, architecture ledger `8a2b95b7c`.
+- **Changes/decisions:** integrated current main (`43764d978`) while preserving
+  connector, categorization, and recurring-discovery work. Retained both agent
+  ledger pointers and removed duplicate Plaid package-import keys introduced by
+  the merge. Reconciled the architecture ledger with the implemented CLI work.
+- **Validation:** 812 sync-server tests passed across 68 files using a fresh
+  temporary data directory; full typecheck, server build, and commit hooks passed.
+  The first test invocation encountered stale test-database fixture IDs; the
+  isolated rerun passed without modifying existing user or test data.
+- **Remaining:** exact-head Codex review and PR checks gate publication. W2.1 is
+  internal infrastructure; automatic ledger application and broader reconciliation
+  remain planned as described in FINANCIAL_DATA.md and ROADMAP.md.
