@@ -95,6 +95,13 @@ have explicit currency/precision rules and exclude incomplete/unverified data.
 
 ### W3. Categorization and Local AI
 
+**Delivery evidence (2026-11-12):** the first CLI slice provides the review queue,
+correction-based suggestions, optional local inference, approval/rejection/undo,
+and journal recovery. See [CATEGORIZATION.md](CATEGORIZATION.md) for the interface,
+validation commands, and remaining integration work. Real-model accuracy testing,
+the W7 interface, and profile/shared-feedback integration remain open; W3 is not
+fully complete.
+
 **Owns:** category suggestions, merchant cleanup, deterministic rules, feedback,
 and optional local inference.
 
