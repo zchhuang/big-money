@@ -211,17 +211,12 @@ if [[ ! -t 0 ]]; then
 fi
 command -v node >/dev/null 2>&1 || { printf 'Install Node.js 24+ first.\n' >&2; return 1; }
 node -e 'if (Number(process.versions.node.split(".")[0]) < 24) { console.error("Node.js 24+ is required."); process.exit(1); }'
+node bin/check-plaid-environment.mts "$ENV_FILE"
 if [[ ! -f node_modules/.yarn-state.yml ]]; then
   node .yarn/releases/yarn-4.17.1.cjs install --immutable
 fi
 node bin/setup-plaid.mjs
 chmod 600 "$ENV_FILE"
-local task_environment
- task_environment="$(_existing PLAID_ENV || true)"
-if [[ "$task_environment" == "production" ]]; then
-  printf 'This file is configured for Production. Use a separate Sandbox checkout/configuration.\n' >&2
-  return 1
-fi
 banner "Big Money · Plaid Sandbox setup"
 
 stage "Create or sign in to your Plaid developer account"
