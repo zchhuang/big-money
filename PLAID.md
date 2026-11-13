@@ -31,6 +31,45 @@ budget to the server. The initial local-only budget mode is not sufficient for
 these server routes. Server storage lives in `.local-data/`. The frontend dev
 server also runs on port 3001; use port 5006 for the same-origin server endpoints.
 
+## Guided Sandbox Kickoff
+
+For first-time credential setup, run this repeatable wizard from the repository root:
+
+```sh
+bash bin/setup-plaid-sandbox.sh
+```
+
+Sign in or create a developer account in the Plaid Dashboard, then open its
+API Keys section and copy `client_id` and the **Sandbox** secret into the hidden
+terminal prompts. The wizard initializes this checkout's local storage and
+preserves any existing encryption key. It keeps the integration disabled until
+validation succeeds. It refuses to overwrite a Production environment.
+
+The check creates a Hosted Link token and a disposable synthetic bank Item,
+exchanges its public token, reads accounts and an initial transaction page,
+and removes the Item. Its output contains counts and safe error codes, not
+credentials. An initially empty transaction page can mean history is preparing.
+This does not test browser completion, institution-specific OAuth, Fidelity
+access, or Production permissions, and it does not import into your budget.
+
+Run the check again independently:
+
+```sh
+node --env-file=.env.plaid .yarn/releases/yarn-4.17.1.cjs workspace @actual-app/sync-server plaid:check
+```
+
+The command rejects Production before contacting it and attempts cleanup if
+retrieval fails after exchange. If cleanup itself fails, inspect temporary Items
+in your Plaid Dashboard. After the wizard succeeds, start or restart the server
+with the configured environment; an already-running server does not reload keys.
+Each worktree has its own ignored `.env.plaid` and local storage. Coordinate the
+server port when running more than one checkout.
+
+Use `user_good` / `pass_good` when the Sandbox Link flow asks for test bank
+credentials. Sandbox does not require your real bank login. Sources:
+[Plaid Quickstart](https://plaid.com/docs/quickstart/) and
+[Sandbox overview](https://plaid.com/docs/sandbox/).
+
 ## Connection Flow
 
 All routes below are under `/plaid`. Supply `X-Actual-Token` with an existing
