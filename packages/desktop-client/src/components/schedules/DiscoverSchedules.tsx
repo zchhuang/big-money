@@ -213,6 +213,10 @@ export function DiscoverSchedules() {
   } = useQuery({
     queryKey: ['schedules', 'discovery'],
     queryFn: () => send('schedule/discover'),
+    // Preserve candidate IDs and partial-creation retries throughout this review.
+    staleTime: Infinity,
+    refetchOnWindowFocus: false,
+    refetchOnReconnect: false,
     gcTime: 0,
     retry: false,
   });

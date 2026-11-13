@@ -102,3 +102,20 @@ and completed-task reports. Their checks are historical results, not new reruns.
   are publication gates; their results are reported with the final PR outcome.
 - **Remaining:** the unimplemented W4 milestones above remain deferred. Publishing
   this slice does not establish subscription classification or provider coverage.
+
+### 2026-11-12 — W4 Exact-Head Review Corrections
+
+- **Workstream/branch:** W4 publication, `codex/w4-recurring-discovery`.
+- **Review findings:** long-period discovery used only the newest merchant
+  transaction as an anchor; automatic refetches replaced candidate IDs during
+  review and could break selection or partial-creation retries.
+- **Changes:** evaluate historical anchors so unrelated newer purchases do not
+  hide recurring activity; hold the discovery snapshot stable until the modal
+  closes or the user explicitly retries. Added annual-plus-one-off regression.
+- **Architecture:** existing core matching, schedule service, and UI ownership
+  remain unchanged; no storage or integration contract changes.
+- **Validation:** 73 schedule tests, full typecheck, scoped lint, production
+  build, and rebuilt browser workflow passed; rendered review screen inspected.
+  CLI re-review of the resulting head remains the final publication gate.
+- **Handoff:** the PR stayed open while these findings were resolved; remaining
+  W4 milestone scope is unchanged.

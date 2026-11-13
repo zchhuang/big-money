@@ -114,54 +114,56 @@ export function findLongPeriodSchedules(
   const result: DiscoveryCandidate[] = [];
   for (const group of groups.values()) {
     group.sort((a, b) => b.date.localeCompare(a.date));
-    const latest = group[0];
-    for (const months of [3, 12]) {
-      const count = months === 12 ? 2 : 3;
-      const config: RecurConfig = {
-        start: dayFromDate(
-          subMonths(parseDate(latest.date), months * (count - 1)),
-        ),
-        frequency: months === 12 ? 'yearly' : 'monthly',
-        ...(months === 3 ? { interval: 3 } : {}),
-        ...(months === 3 && getDate(parseDate(latest.date)) > 28
-          ? { patterns: [{ type: 'day', value: -1 }] }
-          : {}),
-      };
-      // Use the actual recurrence engine's dates, including month-end and leap
-      // behavior. Evidence must match the rule we will later create.
-      const dates = new RSchedule({ rrules: recurConfigToRSchedule(config) })
-        .occurrences({ take: count })
-        .toArray()
-        .map(occurrence => dayFromDate(occurrence.date));
-      const occurrences = dates.map(date => ({
-        date,
-        transactions: group.filter(
-          t =>
-            Math.abs(
-              differenceInCalendarDays(parseDate(t.date), parseDate(date)),
-            ) <= 2,
-        ),
-      }));
-      const threshold = getApproxNumberThreshold(latest.amount);
-      const hasInterveningCharges = group.some(
-        transaction =>
-          transaction.date >= dates[0] &&
-          transaction.date <= dates[dates.length - 1] &&
-          Math.abs(transaction.amount - latest.amount) <= threshold &&
-          !dates.some(
-            date =>
+    // A later one-off purchase must not hide an older recurring series.
+    for (const latest of group) {
+      for (const months of [3, 12]) {
+        const count = months === 12 ? 2 : 3;
+        const config: RecurConfig = {
+          start: dayFromDate(
+            subMonths(parseDate(latest.date), months * (count - 1)),
+          ),
+          frequency: months === 12 ? 'yearly' : 'monthly',
+          ...(months === 3 ? { interval: 3 } : {}),
+          ...(months === 3 && getDate(parseDate(latest.date)) > 28
+            ? { patterns: [{ type: 'day', value: -1 }] }
+            : {}),
+        };
+        // Use the actual recurrence engine's dates, including month-end and leap
+        // behavior. Evidence must match the rule we will later create.
+        const dates = new RSchedule({ rrules: recurConfigToRSchedule(config) })
+          .occurrences({ take: count })
+          .toArray()
+          .map(occurrence => dayFromDate(occurrence.date));
+        const occurrences = dates.map(date => ({
+          date,
+          transactions: group.filter(
+            t =>
               Math.abs(
-                differenceInCalendarDays(
-                  parseDate(transaction.date),
-                  parseDate(date),
-                ),
+                differenceInCalendarDays(parseDate(t.date), parseDate(date)),
               ) <= 2,
           ),
-      );
-      // A long cadence cannot explain monthly/weekly matching charges between
-      // its sample dates, even when both candidates would receive equal ranks.
-      if (!hasInterveningCharges) {
-        result.push(...matchScheduleOccurrences(occurrences, config));
+        }));
+        const threshold = getApproxNumberThreshold(latest.amount);
+        const hasInterveningCharges = group.some(
+          transaction =>
+            transaction.date >= dates[0] &&
+            transaction.date <= dates[dates.length - 1] &&
+            Math.abs(transaction.amount - latest.amount) <= threshold &&
+            !dates.some(
+              date =>
+                Math.abs(
+                  differenceInCalendarDays(
+                    parseDate(transaction.date),
+                    parseDate(date),
+                  ),
+                ) <= 2,
+            ),
+        );
+        // A long cadence cannot explain monthly/weekly matching charges between
+        // its sample dates, even when both candidates would receive equal ranks.
+        if (!hasInterveningCharges) {
+          result.push(...matchScheduleOccurrences(occurrences, config));
+        }
       }
     }
   }

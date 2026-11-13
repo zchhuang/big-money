@@ -158,4 +158,14 @@ describe('quarterly and annual recurrence', () => {
       ),
     ).toEqual([]);
   });
+  it('finds annual activity despite a later unrelated purchase at the same merchant', () => {
+    const candidates = findLongPeriodSchedules([
+      transaction('2025-01-01'),
+      transaction('2026-01-01'),
+      transaction('2026-02-10', { amount: -51000 }),
+    ]);
+    expect(candidates).toHaveLength(1);
+    expect(candidates[0].date.frequency).toBe('yearly');
+    expect(candidates[0].evidence.lastDate).toBe('2026-01-01');
+  });
 });
