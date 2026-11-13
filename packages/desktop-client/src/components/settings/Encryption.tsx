@@ -82,7 +82,7 @@ export function EncryptionSettings() {
             <span>End-to-end encryption</span> is not available when making an
             unencrypted connection to a remote server. You'll need to enable
             HTTPS on your server to use end-to-end encryption. This problem may
-            also occur if your browser is too old to work with Actual.
+            also occur if your browser is too old to work with Know Thy Wealth.
           </Trans>{' '}
           <Link
             variant="external"

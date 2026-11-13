@@ -315,7 +315,7 @@ export function ConfigServer() {
         );
       default:
         return t(
-          'Server does not look like an Actual server. Is it set up correctly?',
+          'Server does not look like a Know Thy Wealth server. Is it set up correctly?',
         );
     }
   }
@@ -421,13 +421,14 @@ export function ConfigServer() {
             {currentUrl ? (
               <Trans>
                 Existing sessions will be logged out and you will log in to this
-                server. We will validate that Actual is running at this URL.
+                server. We will validate that Know Thy Wealth is running at this
+                URL.
               </Trans>
             ) : (
               <Trans>
                 A sync server keeps your budget up to date across all your
                 devices and unlocks features like bank syncing. It is completely
-                optional: Actual works great on just this device too.
+                optional: Know Thy Wealth works great on just this device too.
               </Trans>
             )}
           </Text>

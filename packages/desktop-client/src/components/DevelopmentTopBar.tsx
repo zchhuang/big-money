@@ -18,7 +18,7 @@ export function DevelopmentTopBar() {
         flexShrink: 0,
       }}
     >
-      <View>This is a demo build of Actual.</View>
+      <View>This is a demo build of Know Thy Wealth.</View>
       <View>
         <Link
           variant="external"

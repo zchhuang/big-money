@@ -112,7 +112,7 @@ export function MobileScheduleEditPage() {
       dispatch({
         type: 'form-error',
         error: t(
-          'An error occurred while saving. Please visit https://actualbudget.org/contact/ for support.',
+          'An error occurred while saving. Please visit https://github.com/zchhuang/big-money/issues for support.',
         ),
       });
       return;

@@ -2,7 +2,8 @@
   "name": "desktop-electron",
   "version": "26.11.0",
   "description": "A simple and powerful personal finance system",
-  "author": "Actual",
+  "homepage": "https://github.com/zchhuang/big-money",
+  "author": "Know Thy Wealth contributors",
   "main": "build/desktop-electron/index.js",
   "scripts": {
     "clean": "rm -rf dist",
@@ -34,7 +35,7 @@
     "vitest": "^5.0.4"
   },
   "build": {
-    "appId": "com.actualbudget.actual",
+    "appId": "com.knowthywealth.desktop",
     "files": [
       "build",
       "!build/desktop-electron/{tests,vitest.config.*}",
@@ -59,7 +60,7 @@
       "icon": "icons/icon.icns",
       "hardenedRuntime": true,
       "gatekeeperAssess": false,
-      "artifactName": "${productName}-mac-${arch}.${ext}",
+      "artifactName": "KnowThyWealth-mac-${arch}.${ext}",
       "target": [
         {
           "target": "dmg",
@@ -80,7 +81,7 @@
           ]
         }
       ],
-      "artifactName": "${productName}-linux-${arch}.${ext}",
+      "artifactName": "KnowThyWealth-linux-${arch}.${ext}",
       "extraResources": [
         "extra-resources/linux"
       ],
@@ -90,7 +91,7 @@
           "Keywords": "Budget;Finance;Money;Expenses;Savings;"
         }
       },
-      "executableName": "actual"
+      "executableName": "know-thy-wealth"
     },
     "win": {
       "target": [
@@ -112,15 +113,14 @@
         }
       ],
       "icon": "icons/icon.png",
-      "artifactName": "${productName}-windows-${arch}.${ext}"
+      "artifactName": "KnowThyWealth-windows-${arch}.${ext}"
     },
     "appx": {
-      "identityName": "actualbudget.org.ActualBudget",
-      "publisherDisplayName": "actualbudget.org",
-      "displayName": "Actual Budget",
-      "publisher": "CN=19454997-90E1-4473-879D-96D6A77A6056"
+      "identityName": "KnowThyWealth.Desktop",
+      "publisherDisplayName": "Know Thy Wealth",
+      "displayName": "Know Thy Wealth"
     },
     "npmRebuild": false
   },
-  "productName": "Actual"
+  "productName": "Know Thy Wealth"
 }

@@ -63,7 +63,7 @@ jobs:
           sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
           sudo flatpak install org.flatpak.Builder -y
 
-          METAINFO_FILE="packages/desktop-electron/extra-resources/linux/com.actualbudget.actual.metainfo.xml"
+          METAINFO_FILE="packages/desktop-electron/extra-resources/linux/com.knowthywealth.desktop.metainfo.xml"
           TODAY=$(date +%Y-%m-%d)
           VERSION=$(yarn workspace @actual-app/ci-actions tsx bin/get-next-package-version.ts --package-json ./packages/desktop-electron/package.json --type nightly)
           sed -i "s/%RELEASE_VERSION%/$VERSION/g; s/%RELEASE_DATE%/$TODAY/g" "$METAINFO_FILE"
@@ -104,51 +104,51 @@ jobs:
       - name: Upload Linux x64 AppImage
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
-          name: Actual-linux-x86_64.AppImage
+          name: KnowThyWealth-linux-x86_64.AppImage
           if-no-files-found: ignore
-          path: packages/desktop-electron/dist/Actual-linux-x86_64.AppImage
+          path: packages/desktop-electron/dist/KnowThyWealth-linux-x86_64.AppImage
 
       - name: Upload Linux arm64 AppImage
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
-          name: Actual-linux-arm64.AppImage
+          name: KnowThyWealth-linux-arm64.AppImage
           if-no-files-found: ignore
-          path: packages/desktop-electron/dist/Actual-linux-arm64.AppImage
+          path: packages/desktop-electron/dist/KnowThyWealth-linux-arm64.AppImage
 
       - name: Upload Windows x32 exe
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
-          name: Actual-windows-ia32.exe
+          name: KnowThyWealth-windows-ia32.exe
           if-no-files-found: ignore
-          path: packages/desktop-electron/dist/Actual-windows-ia32.exe
+          path: packages/desktop-electron/dist/KnowThyWealth-windows-ia32.exe
 
       - name: Upload Windows x64 exe
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
-          name: Actual-windows-x64.exe
+          name: KnowThyWealth-windows-x64.exe
           if-no-files-found: ignore
-          path: packages/desktop-electron/dist/Actual-windows-x64.exe
+          path: packages/desktop-electron/dist/KnowThyWealth-windows-x64.exe
 
       - name: Upload Windows arm64 exe
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
-          name: Actual-windows-arm64.exe
+          name: KnowThyWealth-windows-arm64.exe
           if-no-files-found: ignore
-          path: packages/desktop-electron/dist/Actual-windows-arm64.exe
+          path: packages/desktop-electron/dist/KnowThyWealth-windows-arm64.exe
 
       - name: Upload Mac x64 dmg
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
-          name: Actual-mac-x64.dmg
+          name: KnowThyWealth-mac-x64.dmg
           if-no-files-found: ignore
-          path: packages/desktop-electron/dist/Actual-mac-x64.dmg
+          path: packages/desktop-electron/dist/KnowThyWealth-mac-x64.dmg
 
       - name: Upload Mac arm64 dmg
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
-          name: Actual-mac-arm64.dmg
+          name: KnowThyWealth-mac-arm64.dmg
           if-no-files-found: ignore
-          path: packages/desktop-electron/dist/Actual-mac-arm64.dmg
+          path: packages/desktop-electron/dist/KnowThyWealth-mac-arm64.dmg
 
       - name: Upload Windows Store Build
         if: ${{ startsWith(matrix.os, 'windows') }}

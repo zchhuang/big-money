@@ -20,17 +20,17 @@ export function getUnsafeZipError({
   switch (zipReason) {
     case 'archive-size':
       return t(
-        'This file is larger than the maximum supported size of {{maxSizeMB}} MB, sorry! Visit https://actualbudget.org/contact/ for support.',
+        'This file is larger than the maximum supported size of {{maxSizeMB}} MB, sorry! Visit https://github.com/zchhuang/big-money/issues for support.',
         { maxSizeMB },
       );
     case 'entry-size':
       return t(
-        'The file "{{entryName}}" in this archive is larger than the maximum supported size of {{maxSizeMB}} MB, sorry! Visit https://actualbudget.org/contact/ for support.',
+        'The file "{{entryName}}" in this archive is larger than the maximum supported size of {{maxSizeMB}} MB, sorry! Visit https://github.com/zchhuang/big-money/issues for support.',
         { entryName, maxSizeMB },
       );
     case 'total-size':
       return t(
-        'The uncompressed contents of this archive are larger than the maximum supported size of {{maxSizeMB}} MB, sorry! Visit https://actualbudget.org/contact/ for support.',
+        'The uncompressed contents of this archive are larger than the maximum supported size of {{maxSizeMB}} MB, sorry! Visit https://github.com/zchhuang/big-money/issues for support.',
         { maxSizeMB },
       );
     case 'unsafe-entry-name':
@@ -45,7 +45,7 @@ export function getUnsafeZipError({
       );
     default:
       return t(
-        'This file could not be imported, sorry! Visit https://actualbudget.org/contact/ for support.',
+        'This file could not be imported, sorry! Visit https://github.com/zchhuang/big-money/issues for support.',
       );
   }
 }
@@ -83,7 +83,7 @@ export function getUploadError({ reason, meta }: ErrorWithMeta) {
       return t('Uploading the file failed. Check your network connection.');
     default:
       return t(
-        'An internal error occurred, sorry! Visit https://actualbudget.org/contact/ for support. (ref: {{reason}})',
+        'An internal error occurred, sorry! Visit https://github.com/zchhuang/big-money/issues for support. (ref: {{reason}})',
         { reason },
       );
   }
@@ -91,7 +91,7 @@ export function getUploadError({ reason, meta }: ErrorWithMeta) {
 
 function getSchemaMismatchError() {
   return t(
-    'This budget could not be loaded because it uses a newer database schema than this version of Actual supports. Make sure you are using the latest version, then try again.',
+    'This budget could not be loaded because it uses a newer database schema than this version of Know Thy Wealth supports. Make sure you are using the latest version, then try again.',
   );
 }
 
@@ -116,7 +116,7 @@ export function getDownloadError({
     case 'invalid-zip-file':
     case 'invalid-meta-file':
       return t(
-        'Downloaded file is invalid, sorry! Visit https://actualbudget.org/contact/ for support.',
+        'Downloaded file is invalid, sorry! Visit https://github.com/zchhuang/big-money/issues for support.',
       );
     case 'mismatched-cloud-file':
       return t(
@@ -128,7 +128,7 @@ export function getDownloadError({
         return getUnsafeZipError(zipMeta);
       }
       return t(
-        'This file is too large to import, sorry! Visit https://actualbudget.org/contact/ for support.',
+        'This file is too large to import, sorry! Visit https://github.com/zchhuang/big-money/issues for support.',
       );
     }
     case 'decrypt-failure':
@@ -153,7 +153,7 @@ export function getDownloadError({
           ? `, fileId: ${String(meta.fileId)}`
           : '';
       return t(
-        'Something went wrong trying to download that file, sorry! Visit https://actualbudget.org/contact/ for support. reason: {{reason}}{{info}}',
+        'Something went wrong trying to download that file, sorry! Visit https://github.com/zchhuang/big-money/issues for support. reason: {{reason}}{{info}}',
         { reason, info },
       );
     }
@@ -172,13 +172,13 @@ export function getTestKeyError({ reason }: ErrorWithMeta) {
       );
     case 'old-key-style':
       return t(
-        'This file is encrypted with an old unsupported key style. Recreate the key on a device where the file is available, or use an older version of Actual to download it.',
+        'This file is encrypted with an old unsupported key style. Recreate the key on a device where the file is available, or use an older version of Know Thy Wealth to download it.',
       );
     case 'decrypt-failure':
       return t('Unable to decrypt file with this password. Please try again.');
     default:
       return t(
-        'Something went wrong trying to create a key, sorry! Visit https://actualbudget.org/contact/ for support.',
+        'Something went wrong trying to create a key, sorry! Visit https://github.com/zchhuang/big-money/issues for support.',
       );
   }
 }
@@ -216,7 +216,7 @@ export function getUserAccessErrors(reason: string) {
       return t('User already has access.');
     default:
       return t(
-        'An internal error occurred, sorry! Visit https://actualbudget.org/contact/ for support. (ref: {{reason}})',
+        'An internal error occurred, sorry! Visit https://github.com/zchhuang/big-money/issues for support. (ref: {{reason}})',
         { reason },
       );
   }
@@ -248,7 +248,7 @@ export function getOpenIdErrors(reason: string) {
       );
     default:
       return t(
-        'An internal error occurred, sorry! Visit https://actualbudget.org/contact/ for support. (ref: {{reason}})',
+        'An internal error occurred, sorry! Visit https://github.com/zchhuang/big-money/issues for support. (ref: {{reason}})',
         { reason },
       );
   }

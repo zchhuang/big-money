@@ -68,7 +68,7 @@ describe('useNewsNotification', () => {
     );
     expect(store.getState().notifications.notifications[0]).toMatchObject({
       id: 'news-release-notification',
-      title: "What's new in Actual 99.9.9",
+      title: "What's new in Know Thy Wealth 99.9.9",
       sticky: true,
     });
   });
@@ -97,7 +97,7 @@ describe('useNewsNotification', () => {
       expect(store.getState().notifications.notifications).toHaveLength(1),
     );
     const notification = store.getState().notifications.notifications[0];
-    expect(notification.title).toBe("What's new in Actual 99.9.9");
+    expect(notification.title).toBe("What's new in Know Thy Wealth 99.9.9");
 
     notification.onClose?.();
 

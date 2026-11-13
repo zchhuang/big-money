@@ -43,7 +43,7 @@ const releaseEntry: NewsEntry = {
   title: 'Release 26.8.1',
   date: '2026-08-07',
   version: '26.8.1',
-  url: 'https://actualbudget.org/docs/releases#2681',
+  url: 'https://github.com/zchhuang/big-money/releases#2681',
   body: 'A hotfix.\n\n- Fixes **freezes**\n\n:::warning Deprecation\n\nTemplating is deprecated.\n\n:::\n\n> Plain quote.',
   details: '#### Bugfixes\n\n- [#8628](https://example.com/8628) Fix freezes',
 };
@@ -94,7 +94,10 @@ describe('NotificationsPage', () => {
     expect(screen.getByText('freezes')).toBeInTheDocument();
     expect(
       screen.getByRole('link', { name: 'View on actualbudget.org' }),
-    ).toHaveAttribute('href', 'https://actualbudget.org/docs/releases#2681');
+    ).toHaveAttribute(
+      'href',
+      'https://github.com/zchhuang/big-money/releases#2681',
+    );
     expect(
       screen.getByRole('link', { name: 'Read the full post' }),
     ).toHaveAttribute('href', 'https://actualbudget.org/blog/hello');
@@ -151,10 +154,10 @@ describe('NotificationsPage', () => {
 
     expect(
       screen.getByRole('link', { name: 'All release notes' }),
-    ).toHaveAttribute('href', 'https://actualbudget.org/docs/releases');
+    ).toHaveAttribute('href', 'https://github.com/zchhuang/big-money/releases');
     expect(
       screen.getByRole('link', { name: 'Community (Discord)' }),
-    ).toHaveAttribute('href', 'https://discord.gg/pRYNYr4W5A');
+    ).toHaveAttribute('href', 'https://github.com/zchhuang/big-money/issues');
   });
 
   it('asks the user to update when the feed format is not understood', () => {
@@ -162,7 +165,9 @@ describe('NotificationsPage', () => {
     renderPage();
 
     expect(
-      screen.getByText('Update Actual to see the latest notifications.'),
+      screen.getByText(
+        'Update Know Thy Wealth to see the latest notifications.',
+      ),
     ).toBeInTheDocument();
     expect(
       screen.queryByRole('button', { name: 'Try again' }),

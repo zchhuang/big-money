@@ -63,8 +63,10 @@ function About() {
       title={t('About')}
       description={
         <Trans>
-          <span>Actual</span> is a super fast privacy-focused app for managing
-          your finances.
+          <span>Know Thy Wealth</span> is your local-first personal finance
+          workspace. Built on the open-source Actual Budget engine, with an
+          independent identity and roadmap. Original copyright and license
+          notices are retained in the project license.
         </Trans>
       }
     >
@@ -102,7 +104,7 @@ function About() {
           <View style={{ flexDirection: 'row', gap: spacing.md }}>
             <Link
               variant="external"
-              to="https://actualbudget.org/docs/releases"
+              to="https://github.com/zchhuang/big-money/releases"
               linkColor="purple"
             >
               <Trans>Release Notes</Trans>
@@ -157,7 +159,7 @@ function AdvancedAbout() {
     <SettingsGroup
       title={t('Budget file')}
       description={t(
-        'IDs are the names Actual uses to identify your budget internally.',
+        'IDs are the names Know Thy Wealth uses to identify your budget internally.',
       )}
     >
       <SettingsRow

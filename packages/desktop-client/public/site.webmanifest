@@ -1,7 +1,7 @@
 {
-  "name": "Actual",
-  "short_name": "Actual",
-  "description": "A local-first personal finance tool",
+  "name": "Know Thy Wealth",
+  "short_name": "Know Thy Wealth",
+  "description": "Your money, in view. Local-first budgeting and personal finance.",
   "icons": [
     {
       "src": "/android-chrome-192x192.png",
@@ -66,24 +66,8 @@
       ]
     }
   ],
-  "screenshots": [
-    {
-      "src": "/screenshot_wide.png",
-      "form_factor": "wide",
-      "label": "Actual Budget Homepage",
-      "type": "image/png",
-      "sizes": "1280x720"
-    },
-    {
-      "src": "/screenshot_narrow.png",
-      "form_factor": "narrow",
-      "label": "Actual Budget Mobile Homepage",
-      "type": "image/png",
-      "sizes": "350x600"
-    }
-  ],
-  "theme_color": "#5c3dbb",
-  "background_color": "#5c3dbb",
+  "theme_color": "#143c32",
+  "background_color": "#143c32",
   "display": "standalone",
   "start_url": "./"
 }

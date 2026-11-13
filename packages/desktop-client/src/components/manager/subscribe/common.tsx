@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
 
+import { SvgLogo } from '@actual-app/components/icons/logo';
 import { theme } from '@actual-app/components/theme';
 import { send } from '@actual-app/core/platform/client/connection';
 import { isElectron } from '@actual-app/core/shared/environment';
@@ -145,15 +146,23 @@ type TitleProps = {
 };
 export function Title({ text }: TitleProps) {
   return (
-    <h1
-      style={{
-        fontSize: 40,
-        fontWeight: 700,
-        color: theme.pageTextPositive,
-        marginBottom: 20,
-      }}
-    >
-      {text}
-    </h1>
+    <div>
+      <SvgLogo
+        aria-hidden="true"
+        width={38}
+        height={38}
+        style={{ color: theme.pageTextPositive, marginBottom: 16 }}
+      />
+      <h1
+        style={{
+          fontSize: 40,
+          fontWeight: 700,
+          color: theme.pageTextPositive,
+          marginBottom: 20,
+        }}
+      >
+        {text}
+      </h1>
+    </div>
   );
 }

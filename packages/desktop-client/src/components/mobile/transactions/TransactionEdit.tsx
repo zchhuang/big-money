@@ -670,7 +670,7 @@ const TransactionEditInner = memo<TransactionEditInnerProps>(
 
     useEffect(() => {
       if (window.history.length === 1) {
-        window.history.replaceState(null, 'Actual Budget', '/');
+        window.history.replaceState(null, 'Know Thy Wealth', '/');
         window.history.pushState(null, 'Add Transaction', '/transactions/new');
       }
     }, []);

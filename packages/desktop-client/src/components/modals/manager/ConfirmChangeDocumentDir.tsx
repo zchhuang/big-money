@@ -53,7 +53,9 @@ export function ConfirmChangeDocumentDirModal({
         addNotification({
           notification: {
             type: 'message',
-            message: t("Actual's data directory successfully changed."),
+            message: t(
+              "Know Thy Wealth's data directory successfully changed.",
+            ),
           },
         }),
       );
@@ -102,7 +104,7 @@ export function ConfirmChangeDocumentDirModal({
             >
               <Text>
                 <Trans>
-                  You are about to change Actual's data directory from:
+                  You are about to change Know Thy Wealth's data directory from:
                 </Trans>
               </Text>
               <DirectoryDisplay directory={currentBudgetDirectory} />

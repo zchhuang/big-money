@@ -68,19 +68,24 @@ export function Bootstrap() {
 
   return (
     <View style={{ maxWidth: 450 }}>
-      <Title text={t('Welcome to Actual!')} />
+      <Title text={t('Welcome to Know Thy Wealth!')} />
       <Paragraph style={{ fontSize: 16, color: theme.pageTextDark }}>
         <Trans>
-          Actual is a super fast privacy-focused app for managing your finances.
-          To secure your data, you'll need to set a password for your server.
+          Know Thy Wealth brings your finances into view, starting with your
+          budget. To secure your data, you'll need to set a password for your
+          server.
         </Trans>
       </Paragraph>
 
       <Paragraph isLast style={{ fontSize: 16, color: theme.pageTextDark }}>
         <Trans>
           Consider opening{' '}
-          <Link variant="external" to="https://actualbudget.org/docs/tour/">
-            our tour
+          <Link
+            variant="external"
+            linkColor="purple"
+            to="https://actualbudget.org/docs/tour/"
+          >
+            the budgeting guide
           </Link>{' '}
           in a new tab for some guidance on what to do when you've set your
           password.

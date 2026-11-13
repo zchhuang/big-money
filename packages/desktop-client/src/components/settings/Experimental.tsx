@@ -203,7 +203,7 @@ export function ExperimentalFeatures() {
           goalTemplatesEnabled && (
             <FeatureToggle
               flag="goalTemplatesUIEnabled"
-              feedbackLink="https://github.com/actualbudget/actual/issues/7692"
+              feedbackLink="https://github.com/zchhuang/big-money/issues"
               isSubFeature
             >
               <Trans>Budget automations UI</Trans>
@@ -215,7 +215,7 @@ export function ExperimentalFeatures() {
       </FeatureToggle>
       <FeatureToggle
         flag="actionTemplating"
-        feedbackLink="https://github.com/actualbudget/actual/issues/3606"
+        feedbackLink="https://github.com/zchhuang/big-money/issues"
         note={
           <Trans>
             Deprecated: this feature will be removed in a future release. Use
@@ -227,56 +227,56 @@ export function ExperimentalFeatures() {
       </FeatureToggle>
       <FeatureToggle
         flag="formulaMode"
-        feedbackLink="https://github.com/actualbudget/actual/issues/5949"
+        feedbackLink="https://github.com/zchhuang/big-money/issues"
       >
         <Trans>Excel formula mode (Formula cards & Rule formulas)</Trans>
       </FeatureToggle>
       <FeatureToggle
         flag="currency"
-        feedbackLink="https://github.com/actualbudget/actual/issues/5191"
+        feedbackLink="https://github.com/zchhuang/big-money/issues"
       >
         <Trans>Currency support</Trans>
       </FeatureToggle>
       <FeatureToggle
         flag="mobileCalculator"
-        feedbackLink="https://github.com/actualbudget/actual/issues/8255"
+        feedbackLink="https://github.com/zchhuang/big-money/issues"
       >
         <Trans>Mobile calculator</Trans>
       </FeatureToggle>
       <FeatureToggle
         flag="newSidebarUI"
-        feedbackLink="https://github.com/actualbudget/actual/issues/9007"
+        feedbackLink="https://github.com/zchhuang/big-money/issues"
       >
         <Trans>Redesigned sidebar</Trans>
       </FeatureToggle>
       <FeatureToggle
         flag="sankeyReport"
-        feedbackLink="https://github.com/actualbudget/actual/issues/1919"
+        feedbackLink="https://github.com/zchhuang/big-money/issues"
       >
         <Trans>Sankey report</Trans>
       </FeatureToggle>
       <FeatureToggle
         flag="balanceForecastReport"
-        feedbackLink="https://github.com/actualbudget/actual/issues/7669"
+        feedbackLink="https://github.com/zchhuang/big-money/issues"
       >
         <Trans>Balance Forecast Report</Trans>
       </FeatureToggle>
       <FeatureToggle
         flag="budgetAnalysisReport"
-        feedbackLink="https://github.com/actualbudget/actual/issues/6742"
+        feedbackLink="https://github.com/zchhuang/big-money/issues"
       >
         <Trans>Budget Analysis Report</Trans>
       </FeatureToggle>
       <FeatureToggle
         flag="monteCarloReport"
-        feedbackLink="https://github.com/actualbudget/actual/issues/8571"
+        feedbackLink="https://github.com/zchhuang/big-money/issues"
       >
         <Trans>Monte Carlo Analysis Report</Trans>
       </FeatureToggle>
       {isUsingServer && (
         <FeatureToggle
           flag="enableBanking"
-          feedbackLink="https://github.com/actualbudget/actual/issues/7799"
+          feedbackLink="https://github.com/zchhuang/big-money/issues"
         >
           <Trans>Enable Banking sync (EU banks)</Trans>
         </FeatureToggle>
@@ -284,7 +284,7 @@ export function ExperimentalFeatures() {
       {isUsingServer && (
         <FeatureToggle
           flag="akahuBankSync"
-          feedbackLink="https://github.com/actualbudget/actual/issues/8020"
+          feedbackLink="https://github.com/zchhuang/big-money/issues"
         >
           <Trans>Akahu Bank Sync (NZ banks)</Trans>
         </FeatureToggle>
@@ -293,7 +293,7 @@ export function ExperimentalFeatures() {
         <ServerFeatureToggle
           prefName="flags.plugins"
           disableToggle
-          feedbackLink="https://github.com/actualbudget/actual/issues/5950"
+          feedbackLink="https://github.com/zchhuang/big-money/issues"
         >
           <Trans>Client-Side plugins (soon)</Trans>
         </ServerFeatureToggle>

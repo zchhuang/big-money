@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component type="desktop">
+  <id>com.knowthywealth.desktop</id>
+  <name>Know Thy Wealth</name>
+  <summary>Your money, in view.</summary>
+  <metadata_license>MIT</metadata_license>
+  <project_license>MIT</project_license>
+  <content_rating type="oars-1.0" />
+  <description>
+    <p>Know Thy Wealth is a fast, privacy-focused finance app based on the Envelope Budgeting method. It prioritizes user control, allowing you to manage your data independently with multi-device sync and optional end-to-end encryption. The app emphasizes user involvement over automation, offering quick, intuitive tools while keeping you in charge of your financial decisions.</p>
+    <p>Designed for speed, Know Thy Wealth has a streamlined interface that minimizes distractions, making it easy to navigate your finances. It operates locally, ensuring functionality without a network connection while syncing data across devices. This local-first approach also enhances privacy through end-to-end encryption.</p>
+    <p>The budgeting system is grounded in real income, helping you track spending and savings accurately. The app simplifies managing transactions with a minimal, efficient interface, supporting features like split transactions and transfers. Additionally, Know Thy Wealth offers customizable reports alongside default net worth and cash flow reports, enabling users to analyze your finances in a way that suits you.</p>
+  </description>
+  <branding>
+    <!-- For Flathub Banners - https://docs.flathub.org/banner-preview/-->
+    <!-- purple100 -->
+    <color type="primary" scheme_preference="light">#daf2dc</color>
+     <!-- bit darker than our purple900 for contrast -->
+    <color type="primary" scheme_preference="dark">#143c32</color>
+  </branding>
+  <launchable type="desktop-id">com.knowthywealth.desktop.desktop</launchable>
+  <url type="homepage">https://github.com/zchhuang/big-money</url>
+  <url type="bugtracker">https://github.com/zchhuang/big-money/issues</url>
+  <url type="vcs-browser">https://github.com/zchhuang/big-money</url>
+  <recommends>
+    <control>keyboard</control>
+    <control>pointing</control>
+    <control>touch</control>
+  </recommends>
+  <releases>
+    <release version="%RELEASE_VERSION%" date="%RELEASE_DATE%">
+      <url>https://github.com/zchhuang/big-money/releases</url>
+      <description>
+        <p>Check out the full release notes on our website.</p>
+      </description>
+    </release>
+  </releases>
+
+  <developer id="com.knowthywealth">
+    <name>Know Thy Wealth contributors</name>
+  </developer>
+</component>

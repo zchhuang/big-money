@@ -55,11 +55,11 @@ function useGetUserDirectoryErrors() {
           );
         case 'role-does-not-exists':
           return t(
-            'Selected role does not exist, possibly a bug? Visit https://actualbudget.org/contact/ for support.',
+            'Selected role does not exist, possibly a bug? Visit https://github.com/zchhuang/big-money/issues for support.',
           );
         default:
           return t(
-            'An internal error occurred, sorry! Visit https://actualbudget.org/contact/ for support. (ref: {{reason}})',
+            'An internal error occurred, sorry! Visit https://github.com/zchhuang/big-money/issues for support. (ref: {{reason}})',
             { reason },
           );
       }

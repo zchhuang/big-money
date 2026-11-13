@@ -102,8 +102,8 @@ export function ImportYNAB5Modal() {
               </Paragraph>
               <Paragraph>
                 <Trans>
-                  Once you have exported your data, select the file and Actual
-                  will import it. Budgets may not match up exactly because
+                  Once you have exported your data, select the file and Big
+                  Money will import it. Budgets may not match up exactly because
                   things work slightly differently, but you should be able to
                   fix up any problems.
                 </Trans>

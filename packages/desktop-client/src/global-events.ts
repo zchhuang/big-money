@@ -160,7 +160,7 @@ export function handleGlobalEvents(store: AppStore, queryClient: QueryClient) {
   const unlistenIndexeddbQuotaError = listen('indexeddb-quota-error', () => {
     alert(
       t(
-        'We hit a limit on the local storage available. Edits may not be saved. Please get in touch https://actualbudget.org/contact/ so we can help debug this.',
+        'We hit a limit on the local storage available. Edits may not be saved. Please get in touch https://github.com/zchhuang/big-money/issues so we can help debug this.',
       ),
     );
   });

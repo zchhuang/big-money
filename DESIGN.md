@@ -1,11 +1,11 @@
 ---
-name: Actual Budget
-description: Local-first personal finance, built around envelope budgeting
+name: Know Thy Wealth
+description: Local-first personal finance — your money, in view
 # All color values are the light-theme palette mapping; dark and midnight
 # remap the same semantic roles via `theme.*` tokens (see The Semantic Token Rule).
 colors:
-  actual-purple: '#8719e0'
-  actual-purple-hover: '#a368fc'
+  brand-forest: '#235c49'
+  brand-forest-hover: '#194b3b'
   navy-ink: '#102a43'
   navy-slate: '#627d98'
   navy-mist: '#e8ecf0'

@@ -26,7 +26,7 @@ export function OutOfSyncMigrationsModal() {
       {({ state }) => (
         <>
           <ModalHeader
-            title={<ModalTitle title={t('Please update Actual!')} />}
+            title={<ModalTitle title={t('Please update Know Thy Wealth!')} />}
           />
           <View
             style={{
@@ -41,10 +41,11 @@ export function OutOfSyncMigrationsModal() {
             <Text>
               <Paragraph style={{ fontSize: 16 }}>
                 <Trans>
-                  It looks like you&apos;re using an outdated version of the
-                  Actual client. Your budget data has been updated by another
+                  It looks like you&apos;re using an outdated version of the Big
+                  Money client. Your budget data has been updated by another
                   client, but this client is still on the old version. For the
-                  best experience, please update Actual to the latest version.
+                  best experience, please update Know Thy Wealth to the latest
+                  version.
                 </Trans>
               </Paragraph>
             </Text>
@@ -55,10 +56,13 @@ export function OutOfSyncMigrationsModal() {
               }}
             >
               <Trans>
-                If you can&apos;t update Actual at this time you can find the
-                latest release at{' '}
-                <Link variant="external" to="https://app.actualbudget.org">
-                  app.actualbudget.org
+                If you can&apos;t update Know Thy Wealth at this time you can
+                find the latest release at{' '}
+                <Link
+                  variant="external"
+                  to="https://github.com/zchhuang/big-money/releases"
+                >
+                  Know Thy Wealth releases
                 </Link>
                 . You can use it until your client is updated.
               </Trans>

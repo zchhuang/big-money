@@ -21,7 +21,7 @@ export async function checkPlaidSandbox(
 ) {
   if (config.environment !== 'sandbox') throw new Error('sandbox-only');
   await client.linkTokenCreate({
-    client_name: 'Big Money',
+    client_name: 'Know Thy Wealth',
     language: 'en',
     country_codes: config.countryCodes,
     user: { client_user_id: 'big-money-sandbox-check' },

@@ -77,7 +77,7 @@ export function WelcomeScreen() {
           style={{ color: theme.pageTextPositive }}
         />
         <Text style={{ ...styles.veryLargeText, textAlign: 'center' }}>
-          <Trans>Welcome to Actual</Trans>
+          <Trans>Welcome to Know Thy Wealth</Trans>
         </Text>
         <Text
           style={{
@@ -86,7 +86,7 @@ export function WelcomeScreen() {
             fontStyle: 'italic',
           }}
         >
-          <Trans>Your finances - made simple</Trans>
+          <Trans>Your money, in view.</Trans>
         </Text>
       </View>
 
@@ -98,9 +98,9 @@ export function WelcomeScreen() {
           style={{ textAlign: 'center', maxWidth: 400, marginBottom: 0 }}
         >
           <Trans>
-            Actual is a super fast, privacy-focused app for managing your
-            finances. It is 100% free and open source: everything stays on your
-            device, no data is collected, and there is nothing to sign up for.
+            Bring your accounts and spending into view. Your budget works
+            locally, with optional server sync and financial connections you
+            control.
           </Trans>
         </Paragraph>
       </View>
@@ -177,7 +177,7 @@ export function WelcomeScreen() {
             >
               guided tour
             </Link>{' '}
-            to learn how Actual works.
+            for guidance on the budgeting engine.
           </Trans>
         </Paragraph>
       </View>

@@ -4,7 +4,7 @@ import { newsFeedFixture } from './fixtures';
 import { NEWS_FEED_SCHEMA_VERSION } from './types';
 import type { NewsEntry, NewsFeed } from './types';
 
-// Released builds read the file committed on `master`, the same way the custom
+// Released builds read the file committed on `main`, the same way the custom
 // theme catalog is fetched (hooks/useThemeCatalog.ts).
 /**
  * Message of the error thrown when the feed loaded but isn't in a format this
@@ -13,7 +13,7 @@ import type { NewsEntry, NewsFeed } from './types';
 export const UNSUPPORTED_NEWS_FEED_FORMAT = 'Unsupported news feed format';
 
 const REPO_NEWS_FEED_URL =
-  'https://raw.githubusercontent.com/actualbudget/actual/master/packages/desktop-client/src/data/news.json';
+  'https://raw.githubusercontent.com/zchhuang/big-money/main/packages/desktop-client/src/data/news.json';
 
 /**
  * Where to load `news.json` from, in priority order:
@@ -23,7 +23,7 @@ const REPO_NEWS_FEED_URL =
  * 2. Netlify PR previews (`REACT_APP_REVIEW_ID` is set) serve the copy in
  *    their own build, i.e. exactly the file committed on the PR branch. This
  *    also works for PRs from forks, whose branches aren't on GitHub upstream.
- * 3. The committed file on `master`.
+ * 3. The committed file on `main`.
  */
 export async function getNewsFeedUrl(): Promise<string> {
   const override = import.meta.env.REACT_APP_NEWS_FEED_URL;

@@ -22,11 +22,11 @@ describe('getNewsFeedUrl', () => {
     vi.unstubAllEnvs();
   });
 
-  it('defaults to the committed file on master', async () => {
+  it('defaults to the committed file on main', async () => {
     vi.stubEnv('REACT_APP_NEWS_FEED_URL', '');
     vi.stubEnv('REACT_APP_REVIEW_ID', '');
     await expect(getNewsFeedUrl()).resolves.toBe(
-      'https://raw.githubusercontent.com/actualbudget/actual/master/packages/desktop-client/src/data/news.json',
+      'https://raw.githubusercontent.com/zchhuang/big-money/main/packages/desktop-client/src/data/news.json',
     );
   });
 

@@ -180,3 +180,21 @@ and completed-task reports. Their checks are historical results, not new reruns.
 - **Remaining:** exact-head Codex review and PR checks gate publication. W2.1 is
   internal infrastructure; automatic ledger application and broader reconciliation
   remain planned as described in FINANCIAL_DATA.md and ROADMAP.md.
+
+### 2026-11-13 — Know Thy Wealth Rebrand
+
+- **Workstream/branch:** identity and W7 groundwork, `codex/big-money-rebrand`.
+- **Changes/decisions:** adopted the user's chosen name, Know Thy Wealth; replaced
+  visible app branding, onboarding, app icons, native display/install metadata,
+  support/news endpoints, and current product context. Preserved upstream license
+  attribution, package/protocol/config identifiers, mobile bundle IDs, and existing
+  budget paths. `BRAND.md` records compatibility and asset-generation conventions.
+- **Architecture:** presentation and packaging changes only; Plaid Link client names
+  changed in existing service/adapter paths. No storage, financial rules, provider
+  requests, authorization, or transaction boundaries changed. Integrated current main
+  through `24471590a`, retaining other workstreams and their ledger entries.
+- **Validation:** full typecheck and browser/server builds passed after integration;
+  27 Plaid tests passed. Earlier web run passed 1,385 tests with one skipped. Scoped
+  lint and rendered onboarding checks completed; native installers/signing not built.
+- **Remaining:** broader visual redesign and planned financial features remain
+  separate workstreams; this change establishes the identity and reusable assets.

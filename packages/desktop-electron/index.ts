@@ -472,7 +472,10 @@ async function startSyncServer() {
       syncServerProcess.on('message', msg => {
         switch (msg.type) {
           case 'server-started':
-            logMessage('info', 'Sync-Server: Actual Sync Server has started!');
+            logMessage(
+              'info',
+              'Sync-Server: Know Thy Wealth Sync Server has started!',
+            );
             syncServerStarted = true;
             resolve();
             break;
@@ -521,7 +524,7 @@ async function createWindow() {
     y: windowState.y,
     width: windowState.width,
     height: windowState.height,
-    title: 'Actual',
+    title: 'Know Thy Wealth',
     webPreferences: {
       nodeIntegration: false,
       nodeIntegrationInWorker: false,
@@ -621,7 +624,7 @@ async function createWindow() {
   });
 }
 
-app.setAppUserModelId('com.actualbudget.actual');
+app.setAppUserModelId('com.knowthywealth.desktop');
 
 app.on('ready', async () => {
   // Install an `app://` protocol that always returns the base HTML
@@ -773,7 +776,7 @@ ipcMain.handle('set-document-dir', async (_event, directory: string) => {
     probeDirectory = await mkdtemp(probePrefix);
   } catch (error) {
     throw new Error(
-      `Actual is not allowed to create files in ${directory}: ${String(error)}`,
+      `Know Thy Wealth is not allowed to create files in ${directory}: ${String(error)}`,
     );
   }
   await rm(probeDirectory, { recursive: true, force: true }).catch(

@@ -48,7 +48,7 @@ describe('FatalError', () => {
     const error = {
       type: 'app-init-failure',
       DocumentDirFailure: true,
-      path: 'C:\\Users\\peter\\Documents\\Actual',
+      path: 'C:\\Users\\peter\\Documents\\Know Thy Wealth',
       code: 'EPERM',
       message: 'EPERM: operation not permitted, mkdir',
     };
@@ -57,7 +57,7 @@ describe('FatalError', () => {
 
     expect(screen.getByText('Data folder unavailable')).toBeInTheDocument();
     expect(
-      screen.getByText('C:\\Users\\peter\\Documents\\Actual'),
+      screen.getByText('C:\\Users\\peter\\Documents\\Know Thy Wealth'),
     ).toBeInTheDocument();
     expect(
       screen.getByText(/Access to this folder was denied/),
@@ -69,14 +69,16 @@ describe('FatalError', () => {
     const error = {
       type: 'app-init-failure',
       DocumentDirFailure: true,
-      path: '/home/peter/blocked/Actual',
+      path: '/home/peter/blocked/Know Thy Wealth',
       code: 'ENOTDIR',
       message: 'ENOTDIR: not a directory, mkdir',
     };
 
     render(<FatalError error={error} />, { wrapper: TestProviders });
 
-    expect(screen.getByText('/home/peter/blocked/Actual')).toBeInTheDocument();
+    expect(
+      screen.getByText('/home/peter/blocked/Know Thy Wealth'),
+    ).toBeInTheDocument();
     expect(screen.getByText(/ENOTDIR/)).toBeInTheDocument();
     expect(
       screen.queryByText(/Access to this folder was denied/),

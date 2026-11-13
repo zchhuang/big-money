@@ -16,9 +16,10 @@ export function Backups() {
           Backups are taken every {{ BACKUP_FREQUENCY_MINS }} minutes and stored
           in{' '}
           <span>
-            <span>Actual's data directory</span>
+            <span>Know Thy Wealth's data directory</span>
           </span>
-          . Actual retains a maximum of {{ MAX_BACKUPS }} backups at any time.
+          . Know Thy Wealth retains a maximum of {{ MAX_BACKUPS }} backups at
+          any time.
         </Trans>
       }
     />

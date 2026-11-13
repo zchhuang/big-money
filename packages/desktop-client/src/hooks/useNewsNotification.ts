@@ -69,11 +69,11 @@ export function useNewsNotification() {
           type: 'message',
           id: NOTIFICATION_ID,
           sticky: true,
-          title: t("What's new in Actual {{version}}", {
+          title: t("What's new in Know Thy Wealth {{version}}", {
             version: release.version,
           }),
           message: t(
-            'You are now running a new version of Actual. Take a look at what has changed.',
+            'You are now running a new version of Know Thy Wealth. Take a look at what has changed.',
           ),
           button: {
             title: t("See what's new"),

@@ -89,7 +89,7 @@ jobs:
           sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
           sudo flatpak install org.flatpak.Builder -y
 
-          METAINFO_FILE="packages/desktop-electron/extra-resources/linux/com.actualbudget.actual.metainfo.xml"
+          METAINFO_FILE="packages/desktop-electron/extra-resources/linux/com.knowthywealth.desktop.metainfo.xml"
           TODAY=$(date +%Y-%m-%d)
           VERSION=${STEPS_PROCESS_VERSION_OUTPUTS_VERSION}
           sed -i "s/%RELEASE_VERSION%/$VERSION/g; s/%RELEASE_DATE%/$TODAY/g" "$METAINFO_FILE"
@@ -129,7 +129,7 @@ jobs:
           path: |
             packages/desktop-electron/dist/*.dmg
             packages/desktop-electron/dist/*.exe
-            !packages/desktop-electron/dist/Actual-windows.exe
+            !packages/desktop-electron/dist/KnowThyWealth-windows.exe
             packages/desktop-electron/dist/*.AppImage
       - name: Upload Windows Store Build
         if: ${{ startsWith(matrix.os, 'windows') }}
@@ -147,7 +147,7 @@ jobs:
           shopt -s extglob nullglob
           files=(
             packages/desktop-electron/dist/*.dmg
-            packages/desktop-electron/dist/!(Actual-windows).exe
+            packages/desktop-electron/dist/!(KnowThyWealth-windows).exe
             packages/desktop-electron/dist/*.AppImage
             packages/desktop-electron/dist/*.appx
           )

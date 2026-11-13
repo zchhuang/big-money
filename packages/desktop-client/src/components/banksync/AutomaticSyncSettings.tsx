@@ -108,9 +108,9 @@ export function AutomaticSyncSettings() {
         >
           <Trans>
             Download new transactions from your linked accounts in the
-            background while Actual is open. A sync runs when any account hasn't
-            synced within the chosen interval, including syncs from other
-            devices.
+            background while Know Thy Wealth is open. A sync runs when any
+            account hasn't synced within the chosen interval, including syncs
+            from other devices.
           </Trans>
         </Paragraph>
       </View>

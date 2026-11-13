@@ -6,11 +6,11 @@ product
 
 ## Users
 
-People managing their own household finances: privacy-minded budgeters, self-hosters, and families who want full control of their money data. They use Actual regularly (often daily or weekly check-ins) on desktop and mobile, mid-workflow: reconciling accounts, categorizing transactions, adjusting envelope budgets, reviewing reports. Many migrated from other budgeting apps and value that Actual is local-first, free, and open-source.
+Initially a primary user managing personal finances, with independent profiles and selective sharing planned: privacy-minded budgeters, self-hosters, and families who want full control of their money data. They use Actual regularly (often daily or weekly check-ins) on desktop and mobile, mid-workflow: reconciling accounts, categorizing transactions, adjusting envelope budgets, reviewing reports. Many migrated from other budgeting apps and value that Actual is local-first, free, and open-source.
 
 ## Product Purpose
 
-Actual Budget is a local-first personal finance tool built around envelope budgeting. It exists so people can track and plan their money without handing data to a third party — everything runs on their own device or server, with optional sync. Success looks like users trusting the numbers, completing routine money tasks quickly, and sticking with their budget over months and years.
+Know Thy Wealth is an independent local-first personal finance app built on the Actual Budget engine. Budgeting, account aggregation, optional local AI assistance, and portfolio management follow ROADMAP.md; planned capabilities must not be described as shipped. It exists so people can track and plan their money on their own device or server, with optional sync and explicitly connected external financial providers. Success looks like users trusting the numbers, completing routine money tasks quickly, and sticking with their budget over months and years.
 
 ## Brand Personality
 

@@ -141,7 +141,7 @@ export function createPlaidService(
         p => !products.includes(p),
       );
       const request: LinkTokenCreateRequest = {
-        client_name: 'Big Money',
+        client_name: 'Know Thy Wealth',
         language: 'en',
         country_codes: config.countryCodes,
         user: {

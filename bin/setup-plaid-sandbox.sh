@@ -217,7 +217,7 @@ if [[ ! -f node_modules/.yarn-state.yml ]]; then
 fi
 node bin/setup-plaid.mjs
 chmod 600 "$ENV_FILE"
-banner "Big Money · Plaid Sandbox setup"
+banner "Know Thy Wealth · Plaid Sandbox setup"
 
 stage "Create or sign in to your Plaid developer account"
 open_url "https://dashboard.plaid.com/"

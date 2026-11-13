@@ -32,7 +32,7 @@ const syncNotifications: Partial<
     sticky: true,
     title: t('Update available'),
     message: t(
-      'Some synced changes were made with a newer version of Actual. ' +
+      'Some synced changes were made with a newer version of Know Thy Wealth. ' +
         'They will show up here once you update this app.',
     ),
   }),
@@ -156,7 +156,7 @@ export function listenForSyncEvent(store: AppStore, queryClient: QueryClient) {
       let notif: Notification | null = null;
       const learnMore = `[${t('Learn more')}](https://actualbudget.org/docs/getting-started/sync/#debugging-sync-issues)`;
       const githubIssueLink =
-        'https://github.com/actualbudget/actual/issues/new?assignees=&labels=bug&template=bug-report.yml&title=%5BBug%5D%3A+';
+        'https://github.com/zchhuang/big-money/issues/new?assignees=&labels=bug&template=bug-report.yml&title=%5BBug%5D%3A+';
 
       switch (event.subtype) {
         case 'out-of-sync':
@@ -208,7 +208,7 @@ export function listenForSyncEvent(store: AppStore, queryClient: QueryClient) {
           // Tell the user something is wrong with the key state on
           // the server and the key needs to be recreated
           notif = {
-            title: t('Actual has updated the syncing format'),
+            title: t('Know Thy Wealth has updated the syncing format'),
             message: t(
               'This happens rarely (if ever again). The internal syncing format ' +
                 'has changed and you need to reset sync. This will upload data from ' +

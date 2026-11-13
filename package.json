@@ -2,15 +2,15 @@
   "name": "actual",
   "version": "0.0.1",
   "private": true,
-  "description": "A local-first personal finance system",
-  "homepage": "https://github.com/actualbudget/actual/",
+  "description": "Know Thy Wealth — local-first personal finance",
+  "homepage": "https://github.com/zchhuang/big-money",
   "bugs": {
-    "url": "https://github.com/actualbudget/actual/issues/"
+    "url": "https://github.com/zchhuang/big-money/issues"
   },
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git@github.com:actualbudget/actual.git"
+    "url": "git+https://github.com/zchhuang/big-money.git"
   },
   "workspaces": {
     "packages": [
@@ -89,6 +89,7 @@
     "oxlint-tsgolint": "^7.0.2004",
     "p-limit": "^7.3.3",
     "prompts": "^2.4.2",
+    "sharp": "^0.32.6",
     "typescript": "^6.0.3",
     "vitest": "^5.0.4"
   },

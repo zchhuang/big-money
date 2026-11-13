@@ -563,7 +563,7 @@ export function SelectLinkedAccountsModal({
                 <Cell value={t('Institution to Sync')} width={150} />
                 <Cell value={t('Bank Account To Sync')} width={150} />
                 <Cell value={t('Balance')} width={120} />
-                <Cell value={t('Account in Actual')} width="flex" />
+                <Cell value={t('Account in Know Thy Wealth')} width="flex" />
                 <Cell value={t('Starting Date')} width={120} />
                 <Cell value={t('Starting Balance')} width={120} />
                 <Cell value={t('Actions')} width={150} textAlign="center" />
@@ -810,7 +810,7 @@ function TableRow({
           )}
         </PrivacyFilter>
       </Field>
-      {/* Account in Actual */}
+      {/* Account in Know Thy Wealth */}
       <Field
         width="flex"
         truncate={focusedField !== 'account'}

@@ -10,9 +10,9 @@
   --color-pageTextLight: var(--palette-navy500);
   --color-pageTextSubdued: var(--palette-navy300);
   --color-pageTextDark: var(--palette-navy800);
-  --color-pageTextPositive: var(--palette-purple600);
-  --color-pageTextLink: var(--palette-blue600);
-  --color-pageTextLinkLight: var(--palette-blue300);
+  --color-pageTextPositive: #235c49;
+  --color-pageTextLink: #235c49;
+  --color-pageTextLinkLight: #33765c;
 
   --color-cardBackground: var(--palette-white);
   --color-cardBorder: var(--palette-purple700);
@@ -151,8 +151,8 @@
 
   --color-buttonPrimaryText: var(--palette-white);
   --color-buttonPrimaryTextHover: var(--color-buttonPrimaryText);
-  --color-buttonPrimaryBackground: var(--palette-purple500);
-  --color-buttonPrimaryBackgroundHover: var(--palette-purple300);
+  --color-buttonPrimaryBackground: #235c49;
+  --color-buttonPrimaryBackgroundHover: #194b3b;
   --color-buttonPrimaryBorder: var(--color-buttonPrimaryBackground);
   --color-buttonPrimaryShadow: rgba(0, 0, 0, 0.3);
   --color-buttonPrimaryDisabledText: var(--palette-white);
@@ -180,8 +180,8 @@
   --color-calendarSelectedBackground: var(--palette-navy500);
   --color-datePickerRangeBackground: var(--palette-purple150);
 
-  --color-buttonBareText: var(--color-pageText);
-  --color-buttonBareTextHover: var(--color-pageText);
+  --color-buttonBareText: var(--color-pageTextPositive);
+  --color-buttonBareTextHover: var(--color-pageTextPositive);
   --color-buttonBareDisabledText: var(--color-pageTextSubdued);
   --color-buttonBareBackground: transparent;
   --color-buttonBareDisabledBackground: var(--color-buttonBareBackground);

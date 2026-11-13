@@ -1,6 +1,6 @@
-# Big Money Workstreams
+# Know Thy Wealth Workstreams
 
-This is the product roadmap for the Big Money fork of Actual Budget. Use it to
+This is the product roadmap for the Know Thy Wealth fork of Actual Budget. Use it to
 scope implementation and identify dependencies. Workstream milestones below are
 planning targets, not claims of completed features or assigned agent tasks.
 

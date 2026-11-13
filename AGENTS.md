@@ -1,12 +1,13 @@
-# AGENTS.md - Guide for AI Agents Working with Actual Budget
+# AGENTS.md - Know Thy Wealth Agent Guide
 
-This guide provides comprehensive information for AI agents (like Cursor) working with the Actual Budget codebase.
+This guide provides comprehensive information for AI agents (like Cursor) working with the Know Thy Wealth codebase.
 
-## Big Money Fork Workstreams
+## Know Thy Wealth Workstreams
 
-Before planning features, changing shared data models, or implementing a Big Money
+Before planning features, changing shared data models, or implementing a Know Thy Wealth
 workstream, read [ROADMAP.md](ROADMAP.md) for scope, dependencies, milestones, and
-completion criteria. For Plaid setup and its current limitations, read
+completion criteria. For product naming, assets, and compatibility identifiers, read
+[BRAND.md](BRAND.md). For Plaid setup and its current limitations, read
 [PLAID.md](PLAID.md). Treat roadmap items as planned until their acceptance
 criteria have recorded evidence.
 
@@ -24,9 +25,11 @@ in the task commit; keep credentials and personal data out of it.
 
 ## Project Overview
 
-**Actual Budget** is a local-first personal finance tool written in TypeScript/JavaScript. It's 100% free and open-source with synchronization capabilities across devices.
+**Know Thy Wealth** is an independent local-first personal finance app built on
+the Actual Budget engine, written in TypeScript/JavaScript with optional
+synchronization across devices. Preserve upstream license attribution.
 
-- **Repository**: https://github.com/actualbudget/actual
+- **Repository**: https://github.com/zchhuang/big-money
 - **Community Docs**: Documentation is part of the monorepo at `packages/docs/`. Published at https://actualbudget.org/docs
 - **License**: MIT
 - **Primary Language**: TypeScript (with React)

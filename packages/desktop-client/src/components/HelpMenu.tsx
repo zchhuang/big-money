@@ -106,7 +106,9 @@ export const HelpMenu = () => {
         openDocsForCurrentPage();
         break;
       case 'discord':
-        window.Actual.openURLInBrowser('https://discord.gg/pRYNYr4W5A');
+        window.Actual.openURLInBrowser(
+          'https://github.com/zchhuang/big-money/issues',
+        );
         break;
       case 'keyboard-shortcuts':
         dispatch(pushModal({ modal: { name: 'keyboard-shortcuts' } }));
@@ -143,11 +145,11 @@ export const HelpMenu = () => {
           items={[
             {
               name: 'docs',
-              text: t('Documentation'),
+              text: t('Engine documentation (upstream)'),
             },
             {
               name: 'discord',
-              text: t('Community support (Discord)'),
+              text: t('Project support'),
             },
             { name: 'keyboard-shortcuts', text: t('Keyboard shortcuts') },
             { name: 'start-tour', text: t('Take a tour') },

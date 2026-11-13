@@ -1,6 +1,6 @@
-# Big Money Architecture Ledger
+# Know Thy Wealth Architecture Ledger
 
-This ledger records how Big Money is built, why its boundaries exist, and what
+This ledger records how Know Thy Wealth is built, why its boundaries exist, and what
 remains incomplete. Initial entries were recorded on 2026-11-12. This ledger was reconciled with
 main on 2026-11-13 for W2 publication. Implementation evidence is branch-specific
 until merged.
@@ -24,7 +24,7 @@ the client ledger still needs an integration coordinator.
 
 **Status:** Implemented foundation; product extensions are in progress.
 
-Big Money forks stable Actual v26.11.0 to retain its budgeting engine, local
+Know Thy Wealth forks stable Actual v26.11.0 to retain its budgeting engine, local
 storage, and synchronization while developing its own interface and financial
 features. The starting point is commit
 `1766241e3f4b3c578e424c4fa15f1eb83c0da17d` (tag `big-money-base-v26.11.0`).
